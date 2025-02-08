@@ -57,6 +57,8 @@ export class UserService extends CrudService<User> {
 			this._load();
 		} else {
 			window.addEventListener('message', (event: MessageEvent) => {
+				console.log(event.data);
+
 				if (event.data.token) {
 					this._http.set('token', event.data.token);
 
