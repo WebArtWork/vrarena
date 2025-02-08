@@ -53,21 +53,21 @@ export class UserService extends CrudService<User> {
 		this._iframe.style.display = 'none'; // Keep it hidden
 		document.body.appendChild(this._iframe);
 
-		if (this._http.header('token')) {
-			this._load();
-		} else {
-			window.addEventListener('message', (event: MessageEvent) => {
-				console.log(event.data);
+		this._load();
 
-				if (event.data.token) {
-					this._http.set('token', event.data.token);
+		// if (this._http.header('token')) {
+		// 	this._load();
+		// } else {
+		// 	window.addEventListener('message', (event: MessageEvent) => {
+		// 		if (event.data.token) {
+		// 			this._http.set('token', event.data.token);
 
-					this._router.navigateByUrl('/dashboard');
-				}
+		// 			this._router.navigateByUrl('/dashboard');
+		// 		}
 
-				this._load();
-			});
-		}
+		// 		this._load();
+		// 	});
+		// }
 
 		this._store.get('mode', (mode) => {
 			this.setMode(mode);
@@ -170,7 +170,7 @@ export class UserService extends CrudService<User> {
 	}
 
 	authMessage(data: { action: string; token?: string }): void {
-		this._iframe?.contentWindow?.postMessage(data);
+		this._iframe?.contentWindow?.postMessage(data, '*');
 	}
 
 	private _changingPassword = false;

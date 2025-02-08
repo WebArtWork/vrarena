@@ -8,7 +8,7 @@
 					routerLink="/achievements"
 					class="nav__a"
 				>
-					<span class="material-icons">emoji_events</span>
+					<span class="material-icons">workspace_premium</span>
 				</a>
 			</li>
 			<li class="nav__li">
@@ -129,13 +129,13 @@
 				<a
 					[routerLinkActiveOptions]="{ exact: true }"
 					routerLinkActive="_activeLink"
-					routerLink="/admin/reservations"
+					routerLink="/admin/memberships"
 					class="nav__burger-link"
 					*ngIf="us.role('admin')"
 					(click)="hideSidebar()"
 				>
-					<span class="material-icons">event_note</span>
-					<span translate>Theme.Reservations</span>
+					<span class="material-icons">card_membership</span>
+					<span translate>Theme.Memberships</span>
 				</a>
 				<a
 					[routerLinkActiveOptions]="{ exact: true }"
@@ -156,30 +156,8 @@
 					*ngIf="us.role('admin')"
 					(click)="hideSidebar()"
 				>
-					<span class="material-icons">emoji_events</span>
+					<span class="material-icons">workspace_premium</span>
 					<span translate>Theme.Achievements</span>
-				</a>
-				<a
-					[routerLinkActiveOptions]="{ exact: true }"
-					routerLinkActive="_activeLink"
-					routerLink="/admin/memberships"
-					class="nav__burger-link"
-					*ngIf="us.role('admin')"
-					(click)="hideSidebar()"
-				>
-					<span class="material-icons">card_membership</span>
-					<span translate>Theme.Memberships</span>
-				</a>
-				<a
-					[routerLinkActiveOptions]="{ exact: true }"
-					routerLinkActive="_activeLink"
-					routerLink="/admin/comments"
-					class="nav__burger-link"
-					*ngIf="us.role('admin')"
-					(click)="hideSidebar()"
-				>
-					<span class="material-icons">comment</span>
-					<span translate>Theme.Comments</span>
 				</a>
 				<a
 					[routerLinkActiveOptions]="{ exact: true }"
@@ -203,7 +181,62 @@
 					<span class="material-icons">leaderboard</span>
 					<span translate>Theme.Ranks</span>
 				</a>
+				<a
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="_activeLink"
+					routerLink="/admin/reservations"
+					class="nav__burger-link"
+					*ngIf="us.role('admin')"
+					(click)="hideSidebar()"
+				>
+					<span class="material-icons">event_note</span>
+					<span translate>Theme.Reservations</span>
+				</a>
+				<a
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="_activeLink"
+					routerLink="/admin/comments"
+					class="nav__burger-link"
+					*ngIf="us.role('admin')"
+					(click)="hideSidebar()"
+				>
+					<span class="material-icons">comment</span>
+					<span translate>Theme.Comments</span>
+				</a>
 				<hr *ngIf="us.role('admin')" />
+				<a
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="_activeLink"
+					routerLink="/cybersportmanager/dashboard"
+					class="nav__burger-link"
+					*ngIf="us.role('cybersportmanager')"
+					(click)="hideSidebar()"
+				>
+					<span class="material-icons">dashboard</span>
+					<span translate>Theme.Dashboard</span>
+				</a>
+				<hr *ngIf="us.role('cybersportmanager')" />
+				<a
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="_activeLink"
+					routerLink="/sessions"
+					class="nav__burger-link"
+					(click)="hideSidebar()"
+				>
+					<span class="material-icons">leaderboard</span>
+					<span translate>Theme.Tournament sessions</span>
+				</a>
+				<a
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="_activeLink"
+					routerLink="/reservations"
+					class="nav__burger-link"
+					(click)="hideSidebar()"
+				>
+					<span class="material-icons">event_note</span>
+					<span translate>Theme.VR reservations</span>
+				</a>
+				<hr />
 			</div>
 		</div>
 		<router-outlet></router-outlet>

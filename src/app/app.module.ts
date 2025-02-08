@@ -69,11 +69,71 @@ const routes: Routes = [
 		]
 	},
 	{
+		path: 'cybersportmanager',
+		canActivate: [AuthenticatedGuard],
+		component: UserComponent,
+		children: [
+			/* cybersportmanager */
+			{
+				path: 'dashboard',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Dashboard'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./pages/cybersportmanager/dashboard/dashboard.module'
+					).then((m) => m.DashboardModule)
+			}
+		]
+	},
+	{
 		path: '',
 		canActivate: [AuthenticatedGuard],
 		component: UserComponent,
 		children: [
 			/* user */
+			{
+				path: 'reservations',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Reservations'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./pages/user/reservations/reservations.module'
+					).then((m) => m.ReservationsModule)
+			},
+			{
+				path: 'sessions',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Sessions'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/sessions/sessions.module').then(
+						(m) => m.SessionsModule
+					)
+			},
+			{
+				path: 'sessions',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Sessions'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/cybersportsession/pages/sessions/sessions.module'
+					).then((m) => m.SessionsModule)
+			},
 			{
 				path: 'ranks',
 				canActivate: [MetaGuard],

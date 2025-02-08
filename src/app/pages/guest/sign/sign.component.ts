@@ -191,7 +191,7 @@ export class SignComponent {
 
 			this.us.get();
 
-			this.us.authMessage({ action: 'setToken', token });
+			// this.us.authMessage({ action: 'setToken', token });
 
 			this._router.navigateByUrl('/dashboard');
 		} else {
