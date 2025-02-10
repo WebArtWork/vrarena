@@ -75,6 +75,26 @@ const routes: Routes = [
 		children: [
 			/* cybersportmanager */
 			{
+				path: 'comments',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Comments'
+					}
+				},
+				loadChildren: () => import('./pages/cybersportmanager/comments/comments.module').then(m => m.CommentsModule)
+			}, 
+			{
+				path: 'reservations',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Reservations'
+					}
+				},
+				loadChildren: () => import('./pages/cybersportmanager/reservations/reservations.module').then(m => m.ReservationsModule)
+			}, 
+			{
 				path: 'dashboard',
 				canActivate: [MetaGuard],
 				data: {

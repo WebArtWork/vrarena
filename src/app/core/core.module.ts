@@ -12,9 +12,13 @@ import { FormcomponentsModule } from './formcomponents/formcomponents.module';
 import { SelectModule } from './modules/select/select.module';
 import { FormModule } from './modules/form/form.module';
 /* imports */
+import { ReservationComponent } from './components/reservation.component';
+import { CommentComponent } from './components/comment.component';
 
 const components: Type<any>[] = [
 	/* components */
+	ReservationComponent,
+	CommentComponent,
 ];
 
 const selectors: Type<any>[] = [

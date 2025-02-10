@@ -215,6 +215,28 @@
 					<span class="material-icons">dashboard</span>
 					<span translate>Theme.Dashboard</span>
 				</a>
+				<a
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="_activeLink"
+					routerLink="/cybersportmanager/reservations"
+					class="nav__burger-link"
+					*ngIf="us.role('cybersportmanager')"
+					(click)="hideSidebar()"
+				>
+					<span class="material-icons">event_note</span>
+					<span translate>Theme.Reservations</span>
+				</a>
+				<a
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="_activeLink"
+					routerLink="/cybersportmanager/comments"
+					class="nav__burger-link"
+					*ngIf="us.role('cybersportmanager')"
+					(click)="hideSidebar()"
+				>
+					<span class="material-icons">comment</span>
+					<span translate>Theme.Comments</span>
+				</a>
 				<hr *ngIf="us.role('cybersportmanager')" />
 				<a
 					[routerLinkActiveOptions]="{ exact: true }"
