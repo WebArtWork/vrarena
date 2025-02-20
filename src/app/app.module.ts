@@ -14,6 +14,7 @@ import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 import { GuestGuard } from './core/guards/guest.guard';
 import { AdminsGuard } from './core/guards/admins.guard';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { PublicComponent } from './core/theme/public/public.component';
 
 const routes: Routes = [
 	{
@@ -82,8 +83,11 @@ const routes: Routes = [
 						title: 'Comments'
 					}
 				},
-				loadChildren: () => import('./pages/cybersportmanager/comments/comments.module').then(m => m.CommentsModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./pages/cybersportmanager/comments/comments.module'
+					).then((m) => m.CommentsModule)
+			},
 			{
 				path: 'reservations',
 				canActivate: [MetaGuard],
@@ -92,8 +96,11 @@ const routes: Routes = [
 						title: 'Reservations'
 					}
 				},
-				loadChildren: () => import('./pages/cybersportmanager/reservations/reservations.module').then(m => m.ReservationsModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./pages/cybersportmanager/reservations/reservations.module'
+					).then((m) => m.ReservationsModule)
+			},
 			{
 				path: 'dashboard',
 				canActivate: [MetaGuard],
@@ -114,72 +121,6 @@ const routes: Routes = [
 		canActivate: [AuthenticatedGuard],
 		component: UserComponent,
 		children: [
-			/* user */
-			{
-				path: 'reservations',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Reservations'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./pages/user/reservations/reservations.module'
-					).then((m) => m.ReservationsModule)
-			},
-			{
-				path: 'sessions',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Sessions'
-					}
-				},
-				loadChildren: () =>
-					import('./pages/user/sessions/sessions.module').then(
-						(m) => m.SessionsModule
-					)
-			},
-			{
-				path: 'sessions',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Sessions'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./modules/cybersportsession/pages/sessions/sessions.module'
-					).then((m) => m.SessionsModule)
-			},
-			{
-				path: 'ranks',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Ranks'
-					}
-				},
-				loadChildren: () =>
-					import('./pages/user/ranks/ranks.module').then(
-						(m) => m.RanksModule
-					)
-			},
-			{
-				path: 'achievements',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Achievements'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./pages/user/achievements/achievements.module'
-					).then((m) => m.AchievementsModule)
-			},
 			{
 				path: 'tournament',
 				canActivate: [MetaGuard],
@@ -231,6 +172,66 @@ const routes: Routes = [
 					import('./pages/user/games/games.module').then(
 						(m) => m.GamesModule
 					)
+			}
+		]
+	},
+	{
+		path: '',
+		canActivate: [AuthenticatedGuard],
+		component: UserComponent,
+		children: [
+			/* user */
+			{
+				path: 'reservations',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Reservations'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./pages/user/reservations/reservations.module'
+					).then((m) => m.ReservationsModule)
+			},
+			{
+				path: 'sessions',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Sessions'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/sessions/sessions.module').then(
+						(m) => m.SessionsModule
+					)
+			},
+			{
+				path: 'ranks',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Ranks'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/ranks/ranks.module').then(
+						(m) => m.RanksModule
+					)
+			},
+			{
+				path: 'achievements',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Achievements'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./pages/user/achievements/achievements.module'
+					).then((m) => m.AchievementsModule)
 			},
 			{
 				path: 'dashboard',
@@ -406,7 +407,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	declarations: [AppComponent, GuestComponent, UserComponent],
+	declarations: [
+		AppComponent,
+		GuestComponent,
+		UserComponent,
+		PublicComponent
+	],
 	imports: [
 		CoreModule,
 		BrowserModule,

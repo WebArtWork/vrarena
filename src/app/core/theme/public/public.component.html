@@ -1,0 +1,55 @@
+<div class="wrapper" id="wrapper">
+	<nav class="nav">
+		<ul class="nav__ul container">
+			<li class="nav__li">
+				<a
+					routerLinkActive="_activeLink"
+					routerLink="/achievements"
+					class="nav__a"
+				>
+					<span class="material-icons">workspace_premium</span>
+				</a>
+			</li>
+			<li class="nav__li">
+				<a
+					routerLinkActive="_activeLink"
+					routerLink="/ranks"
+					class="nav__a"
+				>
+					<span class="material-icons">leaderboard</span>
+				</a>
+			</li>
+			<li class="nav__li">
+				<a
+					routerLinkActive="_activeLink"
+					routerLink="/tournaments"
+					class="nav__a"
+				>
+					<span class="material-icons">emoji_events</span>
+				</a>
+			</li>
+			<li class="nav__li">
+				<a
+					routerLinkActive="_activeLink"
+					routerLink="/games"
+					class="nav__a"
+				>
+					<span class="material-icons">sports_esports</span>
+				</a>
+			</li>
+			<li class="nav__li">
+				<a
+					routerLinkActive="_activeLink"
+					routerLink="/dashboard"
+					class="nav__a"
+				>
+					<span class="material-icons">dashboard</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<div class="main">
+		<router-outlet></router-outlet>
+	</div>
+</div>
