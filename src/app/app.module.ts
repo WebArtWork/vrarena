@@ -19,7 +19,7 @@ import { PublicComponent } from './core/theme/public/public.component';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: '/sign',
+		redirectTo: '/games',
 		pathMatch: 'full'
 	},
 	{
@@ -118,8 +118,7 @@ const routes: Routes = [
 	},
 	{
 		path: '',
-		canActivate: [AuthenticatedGuard],
-		component: UserComponent,
+		component: PublicComponent,
 		children: [
 			{
 				path: 'tournament',
@@ -172,6 +171,19 @@ const routes: Routes = [
 					import('./pages/user/games/games.module').then(
 						(m) => m.GamesModule
 					)
+			},
+			{
+				path: 'ranks',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Ranks'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/ranks/ranks.module').then(
+						(m) => m.RanksModule
+					)
 			}
 		]
 	},
@@ -205,19 +217,6 @@ const routes: Routes = [
 				loadChildren: () =>
 					import('./pages/user/sessions/sessions.module').then(
 						(m) => m.SessionsModule
-					)
-			},
-			{
-				path: 'ranks',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Ranks'
-					}
-				},
-				loadChildren: () =>
-					import('./pages/user/ranks/ranks.module').then(
-						(m) => m.RanksModule
 					)
 			},
 			{
@@ -401,7 +400,7 @@ const routes: Routes = [
 	},
 	{
 		path: '**',
-		redirectTo: 'profile',
+		redirectTo: 'games',
 		pathMatch: 'full'
 	}
 ];

@@ -48,29 +48,27 @@ export class UserService extends CrudService<User> {
 			name: 'user'
 		});
 
-		this._iframe = document.createElement('iframe');
-		this._iframe.src = 'https://webart.work/auth';
-		this._iframe.style.display = 'none'; // Keep it hidden
-		document.body.appendChild(this._iframe);
+		this.fetch({}, { name: 'me' }).subscribe((user) => {
+			if (user) {
+				if (
+					!localStorage.getItem('waw_user') &&
+					this._router.url === '/sign'
+				) {
+					this._router.navigateByUrl('/profile');
+				}
 
-		this._load();
+				this.setUser(user);
 
-		// if (this._http.header('token')) {
-		// 	this._load();
-		// } else {
-		// 	window.addEventListener('message', (event: MessageEvent) => {
-		// 		if (event.data.token) {
-		// 			this._http.set('token', event.data.token);
-
-		// 			this._router.navigateByUrl('/dashboard');
-		// 		}
-
-		// 		this._load();
-		// 	});
-		// }
+				this.get();
+			} else if (localStorage.getItem('waw_user')) {
+				this.logout();
+			}
+		});
 
 		this._store.get('mode', (mode) => {
-			this.setMode(mode);
+			if (mode) {
+				this.setMode(mode);
+			}
 		});
 	}
 
@@ -150,8 +148,6 @@ export class UserService extends CrudService<User> {
 
 		this._router.navigateByUrl('/sign');
 
-		this.authMessage({ action: 'clearToken' });
-
 		setTimeout(() => {
 			location.reload();
 		}, 100);
@@ -169,30 +165,5 @@ export class UserService extends CrudService<User> {
 		});
 	}
 
-	authMessage(data: { action: string; token?: string }): void {
-		this._iframe?.contentWindow?.postMessage(data, '*');
-	}
-
 	private _changingPassword = false;
-
-	private _load(): void {
-		this.fetch({}, { name: 'me' }).subscribe((user) => {
-			if (user) {
-				if (
-					!localStorage.getItem('waw_user') &&
-					this._router.url === '/sign'
-				) {
-					this._router.navigateByUrl('/profile');
-				}
-
-				this.setUser(user);
-
-				this.get();
-			} else if (localStorage.getItem('waw_user')) {
-				this.logout();
-			}
-		});
-	}
-
-	private _iframe: HTMLIFrameElement | null = null;
 }
