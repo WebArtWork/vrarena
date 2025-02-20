@@ -13,7 +13,7 @@
 						<img [src]="userService.thumb" alt="" />
 					</div>
 				</div>
-				<div class="documents-header__title">Title header</div>
+				<div class="documents-header__title" translate>Theme.Games</div>
 				<div
 					(click)="isMenuOpen = !isMenuOpen"
 					class="burger-wrap"
@@ -25,49 +25,26 @@
 					></div>
 				</div>
 			</div>
-			<div
-				[class.documents-sidebar--open]="isMenuOpen"
-				class="documents-sidebar"
-			>
-				<div
-					(click)="isMenuOpen = !isMenuOpen"
-					class="documents-sidebar__close"
-				>
-					<span class="material-icons">close</span>
-				</div>
-				<div class="documents-sidebar-content">
-					<div class="documents-sidebar__img">
-						<img src="assets/default.png" alt="" />
-					</div>
-					<div class="documents-sidebar__title">
-						Title of sidebar...
-					</div>
-					<div class="documents-sidebar__description">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Sint molestiae consequatur quae. Modi corporis rem amet
-						tempore debitis assumenda minima repellat labore
-						expedita quam. Itaque accusamus culpa ullam
-						necessitatibus nisi.
-					</div>
-				</div>
-			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
 					<div
-						class="documents-main-row"
 						*ngFor="let game of gameService.games"
+						routerLink="/game/{{game._id}}"
+						class="documents-main-row"
 					>
-						<!-- <div class="documents__title"></div> -->
 						<div class="documents-wrap">
 							<div class="documents-img">
-								<img src="/assets/default.png" alt="" />
+								<img
+									[src]="(game.image ? url : '') + (game.image || 'assets/default.png')"
+									[alt]="game.name"
+								/>
 							</div>
 							<div class="documents-text">
 								<div class="documents-text__title">
 									{{game.name}}
 								</div>
 								<div class="documents-text__description">
-									{{game.description}}
+									{{game.shortDescription}}
 								</div>
 							</div>
 						</div>

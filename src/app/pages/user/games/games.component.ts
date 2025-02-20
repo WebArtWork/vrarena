@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CybersportgameService } from 'src/app/modules/cybersportgame/services/cybersportgame.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	templateUrl: './games.component.html',
@@ -8,11 +9,13 @@ import { UserService } from 'src/app/modules/user/services/user.service';
 	standalone: false
 })
 export class GamesComponent {
+	readonly url = environment.url;
+
 	isMenuOpen = false;
 
 	constructor(
-		public userService: UserService,
-		public gameService: CybersportgameService
+		public gameService: CybersportgameService,
+		public userService: UserService
 	) {}
 
 	back(): void {

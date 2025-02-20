@@ -19,7 +19,7 @@ export const cybersportgameFormComponents = {
 		},
 		{
 			name: 'Text',
-			key: 'description',
+			key: 'shortDescription',
 			fields: [
 				{
 					name: 'Placeholder',
@@ -214,6 +214,20 @@ export const cybersportgameFormComponents = {
 				{
 					name: 'Label',
 					value: 'Developer'
+				}
+			]
+		},
+		{
+			name: 'Html',
+			key: 'description',
+			fields: [
+				{
+					name: 'Placeholder',
+					value: 'fill cybersportgame description'
+				},
+				{
+					name: 'Label',
+					value: 'Description'
 				}
 			]
 		}
