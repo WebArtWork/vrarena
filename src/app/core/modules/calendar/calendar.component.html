@@ -44,7 +44,7 @@
 	<div *ngFor="let week of weeksInMonth; index as i" class="calendar__row">
 		<span class="calendar__week">{{week}}</span>
 		<span
-			(click)="dateClicked(
+			(click)="onClick(
 				(!i && skipDays >= day) ?
 					toDate(previousYear, previousMonth, startDay + day) :
 					(i === weeksInMonth.length - 1 && keepDays < day) ?

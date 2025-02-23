@@ -15,15 +15,29 @@
 			<div class="documents-main">
 				<div class="documents-main-content">
 					<div class="documents-main-row" *ngIf="show === 'calendar'">
-						<wcalendar
-							(createEvent)="createEvent($event)"
-						></wcalendar>
+						<wcalendar (dateClicked)="setDate($event)"></wcalendar>
 					</div>
-					<div class="documents-main-row" *ngIf="show === 'day'">
-						<wcalendar></wcalendar>
+					<div class="documents-main-row" *ngIf="show === 'date'">
+						<winput
+							*ngFor="let time of times"
+							[disabled]="!!bookingByDateTime[date+time]"
+							(wChange)="setTime(time, $event)"
+							type="checkbox"
+							[label]="time"
+						></winput>
+						<wbutton
+							[disabled]="!selectedTimes.length"
+							(wClick)="show = 'booked'; book()"
+							>Забронювати</wbutton
+						>
 					</div>
 					<div class="documents-main-row" *ngIf="show === 'booked'">
-						<wcalendar></wcalendar>
+						<div>
+							Ваше прохання щодо бронювання на обрану годину
+							прийнято. Наш менеджер зв'яжеться з вами найближчим
+							часом для підтвердження. Дякуємо за ваш вибір!
+						</div>
+						<a routerLink="/bookings">Переглянути мої бронювання</a>
 					</div>
 				</div>
 			</div>

@@ -207,6 +207,26 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'bookings',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Bookings'
+					}
+				},
+				loadChildren: () => import('./pages/user/bookings/bookings.module').then(m => m.BookingsModule)
+			}, 
+			{
+				path: 'bookings',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Bookings'
+					}
+				},
+				loadChildren: () => import('./modules/cybersportbook/pages/bookings/bookings.module').then(m => m.BookingsModule)
+			}, 
+			{
 				path: 'files',
 				canActivate: [MetaGuard],
 				data: {

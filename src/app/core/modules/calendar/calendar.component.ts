@@ -17,6 +17,8 @@ import { CalendarDate } from './calendar.interface';
 export class CalendarComponent {
 	@Input() eventsByDate: Record<string, CalendarDate[]> = {};
 
+	@Output() dateClicked = new EventEmitter<string>();
+
 	@Output() createEvent = new EventEmitter<CalendarDate>();
 
 	@Output() updateEvent = new EventEmitter<CalendarDate>();
@@ -166,10 +168,12 @@ export class CalendarComponent {
 		return `${year}${join}${month}${join}${day}`;
 	}
 	selectedDate: string = localStorage.getItem('travel_selectedDate') || '';
-	dateClicked(date: string): void {
+	onClick(date: string): void {
 		this.selectedDate = date;
 
 		localStorage.setItem('travel_selectedDate', date);
+
+		this.dateClicked.emit(date);
 
 		this.createEvent.emit({
 			year: Number(date.split('.')[0]),
