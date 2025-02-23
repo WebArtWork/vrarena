@@ -121,6 +121,19 @@ const routes: Routes = [
 		component: PublicComponent,
 		children: [
 			{
+				path: 'book',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Book'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/book/book.module').then(
+						(m) => m.BookModule
+					)
+			},
+			{
 				path: 'tournament',
 				canActivate: [MetaGuard],
 				data: {
@@ -201,8 +214,11 @@ const routes: Routes = [
 						title: 'Files'
 					}
 				},
-				loadChildren: () => import('./modules/file/pages/files/files.module').then(m => m.FilesModule)
-			}, 
+				loadChildren: () =>
+					import('./modules/file/pages/files/files.module').then(
+						(m) => m.FilesModule
+					)
+			},
 			{
 				path: 'reservations',
 				canActivate: [MetaGuard],

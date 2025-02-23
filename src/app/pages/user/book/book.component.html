@@ -1,0 +1,32 @@
+<div class="documents-wrapper">
+	<div class="documents-container">
+		<div class="documents-list">
+			<div class="documents-header">
+				<div class="documents-header-left">
+					<div
+						class="documents-header-left__avatar"
+						routerLink="/profile"
+					>
+						<img [src]="userService.thumb" alt="" />
+					</div>
+				</div>
+				<div class="documents-header__title">Забронюйте час гри</div>
+			</div>
+			<div class="documents-main">
+				<div class="documents-main-content">
+					<div class="documents-main-row" *ngIf="show === 'calendar'">
+						<wcalendar
+							(createEvent)="createEvent($event)"
+						></wcalendar>
+					</div>
+					<div class="documents-main-row" *ngIf="show === 'day'">
+						<wcalendar></wcalendar>
+					</div>
+					<div class="documents-main-row" *ngIf="show === 'booked'">
+						<wcalendar></wcalendar>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

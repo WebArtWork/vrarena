@@ -79,13 +79,23 @@ export class GamesComponent {
 		},
 		buttons: [
 			{
-				icon: 'cloud_download',
+				icon: 'arrow_upward',
 				click: (doc: Cybersportgame): void => {
-					this._form.modalUnique<Cybersportgame>(
-						'cybersportgame',
-						'url',
-						doc
-					);
+					const index = this.rows.findIndex((d) => d._id === doc._id);
+
+					if (index) {
+						this.rows.splice(index, 1);
+
+						this.rows.splice(index - 1, 0, doc);
+					}
+
+					for (let i = 0; i < this.rows.length; i++) {
+						if (this.rows[i].order !== i) {
+							this.rows[i].order = i;
+
+							this._cybersportgameService.update(this.rows[i]);
+						}
+					}
 				}
 			}
 		],
@@ -106,8 +116,8 @@ export class GamesComponent {
 	rows: Cybersportgame[] = [];
 
 	constructor(
-		private _translate: TranslateService,
 		private _cybersportgameService: CybersportgameService,
+		private _translate: TranslateService,
 		private _alert: AlertService,
 		private _form: FormService,
 		private _core: CoreService

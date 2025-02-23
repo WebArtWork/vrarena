@@ -246,6 +246,64 @@ export const cybersportgameFormComponents = {
 			]
 		},
 		{
+			name: 'Boolean',
+			key: 'isMultiplayer',
+			fields: [
+				{
+					name: 'Label',
+					value: 'Can be played with others (Multiplayer)'
+				}
+			]
+		},
+		{
+			name: 'Boolean',
+			key: 'isStanding',
+			fields: [
+				{
+					name: 'Label',
+					value: 'Can be played while standing'
+				}
+			]
+		},
+		{
+			name: 'Boolean',
+			key: 'isSitting',
+			fields: [
+				{
+					name: 'Label',
+					value: 'Can be played while sitting'
+				}
+			]
+		},
+		{
+			name: 'Number',
+			key: 'afterAge',
+			fields: [
+				{
+					name: 'Placeholder',
+					value: 'played after child age'
+				},
+				{
+					name: 'Label',
+					value: 'After child age'
+				}
+			]
+		},
+		{
+			name: 'Number',
+			key: 'maxPlayers',
+			fields: [
+				{
+					name: 'Placeholder',
+					value: 'max game players'
+				},
+				{
+					name: 'Label',
+					value: 'Max Players'
+				}
+			]
+		},
+		{
 			name: 'Html',
 			key: 'description',
 			fields: [
