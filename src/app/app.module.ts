@@ -194,6 +194,16 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'files',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Files'
+					}
+				},
+				loadChildren: () => import('./modules/file/pages/files/files.module').then(m => m.FilesModule)
+			}, 
+			{
 				path: 'reservations',
 				canActivate: [MetaGuard],
 				data: {

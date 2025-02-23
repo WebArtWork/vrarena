@@ -1,6 +1,6 @@
 import { ButtonModule } from 'src/app/core/modules/button/button.module';
 import { InputModule } from 'src/app/core/modules/input/input.module';
-import { FileModule } from 'src/app/core/modules/file/file.module';
+import { FileComponent } from 'src/app/modules/file/components/file/file.component';
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { SelectModule } from 'src/app/core/modules/select/select.module';
 import { CommonModule } from '@angular/common';
@@ -37,7 +37,7 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
 		InputModule,
 		ButtonModule,
 		CommonModule,
-		FileModule,
+		FileComponent,
 		SelectModule,
 		AceModule,
 		FormsModule,

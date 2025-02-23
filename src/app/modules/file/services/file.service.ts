@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
+import { File } from '../interfaces/file.interface';
 import { FileService as WacomFileService } from 'wacom';
+import { CrudService } from 'wacom';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class FileService {
+export class FileService extends CrudService<File> {
 	setFile: (dataUrl: string) => void;
 
 	constructor(private _file: WacomFileService) {
+		super({
+			name: 'file'
+		});
 		this._file.add({
 			id: 'formPhoto',
 			// accept: 'image/*',

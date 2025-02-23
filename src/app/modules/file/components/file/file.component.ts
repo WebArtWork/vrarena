@@ -7,9 +7,10 @@ import {
 	Output,
 	SimpleChanges
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpService, ModalService } from 'wacom';
-import { FileService } from './file.service';
-import { FileCropperComponent } from './file-cropper/file-cropper.component';
+import { FileService } from './../../services/file.service';
+import { FileCropperComponent } from '../file-cropper/file-cropper.component';
 import { environment } from 'src/environments/environment';
 
 /**
@@ -21,7 +22,8 @@ import { environment } from 'src/environments/environment';
 	selector: 'ngx-file',
 	templateUrl: './file.component.html',
 	styleUrls: ['./file.component.scss'],
-	standalone: false
+	standalone: true,
+	imports: [CommonModule]
 })
 export class FileComponent implements OnInit, OnChanges {
 	readonly url = environment.url;
