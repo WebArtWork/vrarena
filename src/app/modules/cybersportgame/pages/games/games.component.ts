@@ -11,17 +11,22 @@ import { firstValueFrom } from 'rxjs';
 @Component({
 	templateUrl: './games.component.html',
 	styleUrls: ['./games.component.scss'],
-	standalone: false,
+	standalone: false
 })
 export class GamesComponent {
-	columns = ['name', 'description'];
+	columns = ['name'];
 
-	form: FormInterface = this._form.getForm('cybersportgame', cybersportgameFormComponents);
+	form: FormInterface = this._form.getForm(
+		'cybersportgame',
+		cybersportgameFormComponents
+	);
 
 	config = {
 		paginate: this.setRows.bind(this),
 		perPage: 20,
-		setPerPage: this._cybersportgameService.setPerPage.bind(this._cybersportgameService),
+		setPerPage: this._cybersportgameService.setPerPage.bind(
+			this._cybersportgameService
+		),
 		allDocs: false,
 		create: (): void => {
 			this._form.modal<Cybersportgame>(this.form, {
@@ -32,11 +37,13 @@ export class GamesComponent {
 					this._preCreate(created as Cybersportgame);
 
 					await firstValueFrom(
-						this._cybersportgameService.create(created as Cybersportgame)
+						this._cybersportgameService.create(
+							created as Cybersportgame
+						)
 					);
 
 					this.setRows();
-				},
+				}
 			});
 		},
 		update: (doc: Cybersportgame): void => {
@@ -55,39 +62,45 @@ export class GamesComponent {
 				),
 				buttons: [
 					{
-						text: this._translate.translate('Common.No'),
+						text: this._translate.translate('Common.No')
 					},
 					{
 						text: this._translate.translate('Common.Yes'),
 						callback: async (): Promise<void> => {
-							await firstValueFrom(this._cybersportgameService.delete(doc));
+							await firstValueFrom(
+								this._cybersportgameService.delete(doc)
+							);
 
 							this.setRows();
-						},
-					},
-				],
+						}
+					}
+				]
 			});
 		},
 		buttons: [
 			{
 				icon: 'cloud_download',
 				click: (doc: Cybersportgame): void => {
-					this._form.modalUnique<Cybersportgame>('cybersportgame', 'url', doc);
-				},
-			},
+					this._form.modalUnique<Cybersportgame>(
+						'cybersportgame',
+						'url',
+						doc
+					);
+				}
+			}
 		],
 		headerButtons: [
 			{
 				icon: 'playlist_add',
 				click: this._bulkManagement(),
-				class: 'playlist',
+				class: 'playlist'
 			},
 			{
 				icon: 'edit_note',
 				click: this._bulkManagement(false),
-				class: 'edit',
-			},
-		],
+				class: 'edit'
+			}
+		]
 	};
 
 	rows: Cybersportgame[] = [];
@@ -130,38 +143,53 @@ export class GamesComponent {
 							this._preCreate(cybersportgame);
 
 							await firstValueFrom(
-								this._cybersportgameService.create(cybersportgame)
+								this._cybersportgameService.create(
+									cybersportgame
+								)
 							);
 						}
 					} else {
 						for (const cybersportgame of this.rows) {
 							if (
 								!cybersportgames.find(
-									(localCybersportgame) => localCybersportgame._id === cybersportgame._id
+									(localCybersportgame) =>
+										localCybersportgame._id ===
+										cybersportgame._id
 								)
 							) {
 								await firstValueFrom(
-									this._cybersportgameService.delete(cybersportgame)
+									this._cybersportgameService.delete(
+										cybersportgame
+									)
 								);
 							}
 						}
 
 						for (const cybersportgame of cybersportgames) {
 							const localCybersportgame = this.rows.find(
-								(localCybersportgame) => localCybersportgame._id === cybersportgame._id
+								(localCybersportgame) =>
+									localCybersportgame._id ===
+									cybersportgame._id
 							);
 
 							if (localCybersportgame) {
-								this._core.copy(cybersportgame, localCybersportgame);
+								this._core.copy(
+									cybersportgame,
+									localCybersportgame
+								);
 
 								await firstValueFrom(
-									this._cybersportgameService.update(localCybersportgame)
+									this._cybersportgameService.update(
+										localCybersportgame
+									)
 								);
 							} else {
 								this._preCreate(cybersportgame);
 
 								await firstValueFrom(
-									this._cybersportgameService.create(cybersportgame)
+									this._cybersportgameService.create(
+										cybersportgame
+									)
 								);
 							}
 						}
