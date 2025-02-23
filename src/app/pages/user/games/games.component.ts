@@ -21,4 +21,12 @@ export class GamesComponent {
 	back(): void {
 		window.history.back();
 	}
+
+	openVideo(url: string): void {
+		const newWindow = window.open(url, '_blank');
+
+		if (newWindow) {
+			newWindow.focus();
+		}
+	}
 }

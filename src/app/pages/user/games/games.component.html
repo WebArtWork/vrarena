@@ -43,9 +43,16 @@
 								<div class="documents-text__title">
 									{{game.name}}
 								</div>
-								<div class="documents-text__description">
-									{{game.shortDescription}}
-								</div>
+								<div
+									class="documents-text__description"
+									[innerHTML]="game.shortDescription"
+								></div>
+								<i
+									(click)="$event.stopPropagation(); openVideo(game.trailer)"
+									class="material-icons"
+									*ngIf="game.trailer"
+									>videocam</i
+								>
 							</div>
 						</div>
 					</div>

@@ -46,16 +46,16 @@ export const cybersportgameFormComponents = {
 			]
 		},
 		{
-			name: 'Text',
+			name: 'Html',
 			key: 'shortDescription',
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill cybersportgame description'
+					value: 'fill cybersportgame short description'
 				},
 				{
 					name: 'Label',
-					value: 'Description'
+					value: 'Short Description'
 				}
 			]
 		},

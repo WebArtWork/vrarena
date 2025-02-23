@@ -5,4 +5,5 @@ export interface Cybersportgame extends CrudDocument {
 	description: string;
 	shortDescription: string;
 	image: string;
+	trailer: string;
 }
