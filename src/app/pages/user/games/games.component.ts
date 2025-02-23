@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Cybersportgame } from 'src/app/modules/cybersportgame/interfaces/cybersportgame.interface';
 import { CybersportgameService } from 'src/app/modules/cybersportgame/services/cybersportgame.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { environment } from 'src/environments/environment';
@@ -13,10 +14,16 @@ export class GamesComponent {
 
 	isMenuOpen = false;
 
+	games: Cybersportgame[] = [];
+
 	constructor(
-		public gameService: CybersportgameService,
+		private _gameService: CybersportgameService,
 		public userService: UserService
-	) {}
+	) {
+		this._gameService
+			.get({}, { name: 'public' })
+			.subscribe((games) => (this.games = games));
+	}
 
 	openVideo(url: string): void {
 		const newWindow = window.open(url, '_blank');
