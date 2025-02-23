@@ -19,6 +19,34 @@ export const cybersportgameFormComponents = {
 		},
 		{
 			name: 'Text',
+			key: 'metaLink',
+			fields: [
+				{
+					name: 'Placeholder',
+					value: 'fill meta link'
+				},
+				{
+					name: 'Label',
+					value: 'Meta link'
+				}
+			]
+		},
+		{
+			name: 'Text',
+			key: 'trailer',
+			fields: [
+				{
+					name: 'Placeholder',
+					value: 'fill Trailer'
+				},
+				{
+					name: 'Label',
+					value: 'Trailer'
+				}
+			]
+		},
+		{
+			name: 'Text',
 			key: 'shortDescription',
 			fields: [
 				{
