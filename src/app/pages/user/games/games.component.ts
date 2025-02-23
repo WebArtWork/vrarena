@@ -18,10 +18,6 @@ export class GamesComponent {
 		public userService: UserService
 	) {}
 
-	back(): void {
-		window.history.back();
-	}
-
 	openVideo(url: string): void {
 		const newWindow = window.open(url, '_blank');
 
