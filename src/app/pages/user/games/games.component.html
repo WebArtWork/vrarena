@@ -1,4 +1,4 @@
-<div class="documents-wrapper" [class.documents-wrapper--open]="isMenuOpen">
+<div class="documents-wrapper">
 	<div class="documents-container">
 		<div class="documents-list">
 			<div class="documents-header">
@@ -10,17 +10,7 @@
 						<img [src]="userService.thumb" alt="" />
 					</div>
 				</div>
-				<div class="documents-header__title" translate>Theme.Games</div>
-				<div
-					(click)="isMenuOpen = !isMenuOpen"
-					class="burger-wrap"
-					class="burger-wrap"
-				>
-					<div
-						[class.burger--close]="isMenuOpen"
-						class="burger"
-					></div>
-				</div>
+				<div class="documents-header__title">Ігри</div>
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
