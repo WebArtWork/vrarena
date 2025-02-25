@@ -1,0 +1,28 @@
+.book-input{
+    margin-bottom: 6px;
+    display: block;
+    &:last-child{
+        margin-bottom: 0;
+    }
+}
+
+.book-finish{
+    text-align: center;
+    div{
+        color:var(--c-text-primary);
+        font-size: 20px;
+    }
+    a{
+        background: linear-gradient(170deg, #c74662 0%, #7251ea 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 20px;
+        font-weight: 900;
+        padding-top: 10px;
+        display: block;
+        border-bottom: 3px solid var(--c-text-primary);
+        width: fit-content;
+        margin: 0 auto;
+        padding: 10px 0 8px;
+    }
+}

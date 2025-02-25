@@ -330,6 +330,9 @@ wform {
 			margin-bottom: 20px;
 			border-radius: 10px;
 		}
+		&--nobar{
+			padding: 0 !important;
+		}
 	}
 	&-sidebar {
 		flex: 0 0 280px;
@@ -436,6 +439,11 @@ wform {
 	&-text {
 		flex: 1 0;
 		padding-left: 40px;
+		i{
+			background: linear-gradient(291deg, #c74662 40%, #7251ea 105%);
+			padding: 3px;
+			border-radius: 5px;
+		}
 		&__title {
 			font-size: 20px;
 			font-weight: 600;

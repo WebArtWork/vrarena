@@ -12,7 +12,7 @@
 				</div>
 				<div class="documents-header__title">Забронюйте час гри</div>
 			</div>
-			<div class="documents-main">
+			<div class="documents-main documents-main--nobar">
 				<div class="documents-main-content">
 					<div class="documents-main-row" *ngIf="show === 'calendar'">
 						<wcalendar (dateClicked)="setDate($event)"></wcalendar>
@@ -24,6 +24,7 @@
 							(wChange)="setTime(time, $event)"
 							type="checkbox"
 							[label]="time"
+							class="book-input"
 						></winput>
 						<wbutton
 							[disabled]="!selectedTimes.length"
@@ -31,7 +32,7 @@
 							>Забронювати</wbutton
 						>
 					</div>
-					<div class="documents-main-row" *ngIf="show === 'booked'">
+					<div class="documents-main-row book-finish" *ngIf="show === 'booked'">
 						<div>
 							Ваше прохання щодо бронювання на обрану годину
 							прийнято. Наш менеджер зв'яжеться з вами найближчим

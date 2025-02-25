@@ -12,7 +12,7 @@
 				</div>
 				<div class="documents-header__title">Ігри</div>
 			</div>
-			<div class="documents-main">
+			<div class="documents-main documents-main--nobar">
 				<div class="documents-main-content">
 					<div
 						*ngFor="let game of games"
@@ -34,28 +34,30 @@
 									class="documents-text__description"
 									[innerHTML]="game.shortDescription"
 								></div>
-								<i
+								<div class="game-additions">
+									<i
 									(click)="$event.stopPropagation(); openVideo(game.trailer)"
 									class="material-icons"
 									*ngIf="game.trailer"
 									>videocam</i
 								>
-
-								<div *ngIf="game.isMultiplayer">
-									<i class="material-icons">groups</i>
-									можна грати з іншими людьми
 								</div>
-								<div *ngIf="game.isStanding">
+
+								<div *ngIf="game.isMultiplayer" class="game-additions">
+									<i class="material-icons">groups</i>
+									<span>можна грати з іншими людьми</span>
+								</div>
+								<div *ngIf="game.isStanding" class="game-additions">
 									<i class="material-icons"
 										>accessibility_new</i
 									>
-									можна грати стоячи
+									<span>можна грати стоячи</span>
 								</div>
-								<div *ngIf="game.isSitting">
+								<div *ngIf="game.isSitting" class="game-additions">
 									<i class="material-icons">event_seat</i>
-									можна грати сидячи
+									<span>можна грати сидячи</span>
 								</div>
-								<div>Вік: {{game.afterAge || 18}}+</div>
+								<div class="game-years">Вік: {{game.afterAge || 18}}+</div>
 								<div
 									*ngIf="game.maxPlayers && game.maxPlayers > 1"
 								>
