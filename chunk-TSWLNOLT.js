@@ -1,0 +1,1 @@
+import{fb as r,r as e}from"./chunk-R53MYYX3.js";var s=(()=>{class t extends r{constructor(){super({name:"cybersportachievement"}),this.achievementsByAuthor={},this.filteredDocuments(this.achievementsByAuthor)}static{this.\u0275fac=function(o){return new(o||t)}}static{this.\u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{s as a};
