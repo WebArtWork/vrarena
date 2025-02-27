@@ -47,7 +47,9 @@ body {
 	transition: all 0.3s;
 	height: 100vh;
 }
-
+.cursor-pointer{
+	cursor: pointer;
+}
 .auth {
 	max-width: 340px;
 	width: 100%;

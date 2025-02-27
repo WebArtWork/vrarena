@@ -1,0 +1,54 @@
+.bookings{
+    &__item{
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    &__icon{
+        display: flex;
+        i{
+            background: linear-gradient(291deg, #c74662 40%, #7251ea 105%);
+            padding: 3px;
+            border-radius: 4px;
+        }
+    }
+    &__text{
+        padding-left: 10px;
+        font-size: 20px;
+        color: var(--c-text-primary);
+        font-weight: 500;
+        span{
+            color: var(--violet);
+            font-weight: 600;
+        }
+    }
+}
+.bookings-title{
+    font-size: 24px;
+    border-bottom: 1px solid var(--c-text-primary);
+    padding: 0 0 0 0;
+    margin-bottom: 20px;
+    span{
+        color: var(--violet);
+    }
+}
+.bookings-winner{
+    display: flex;
+    align-items: center;
+    background: linear-gradient(
+        70deg,
+        #c74662 -3.5%,
+        #51daea 100%);
+    padding: 5px 12px;
+    width: fit-content;
+    border-radius: 5px;
+    margin-left: auto;
+    &__icon{
+        display: flex;
+    }
+    &__text{
+        padding-left: 10px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}

@@ -143,6 +143,7 @@ $transition: if(
 		170deg,
 		#c74662 40%,
 		#7251ea 100%);
+	--violet:#ad90ea;
 }
 
 html.dark:root {
@@ -167,4 +168,5 @@ html.dark:root {
 		170deg,
 		#c74662 40%,
 		#7251ea 100%);
+		--violet:#c5b5e6;
 }
