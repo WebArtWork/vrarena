@@ -120,7 +120,7 @@ textarea.error {
 		height: 26px;
 		display: inline-block;
 		border-radius: 4px;
-		background-color: #5b6577;
+		background-color: var(--c-primary);
 		transform: scale(1);
 		border: 1px solid var(--c-border);
 		transition: var(--transition);

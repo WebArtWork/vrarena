@@ -193,8 +193,13 @@ export class SignComponent {
 			this.us.get();
 
 			// this.us.authMessage({ action: 'setToken', token });
+			console.log(localStorage.getItem('waw_redirect'));
 
-			this._router.navigateByUrl('/dashboard');
+			this._router.navigateByUrl(
+				localStorage.getItem('waw_redirect') || '/games'
+			);
+
+			localStorage.removeItem('waw_redirect');
 		} else {
 			this._alert.error({
 				text: 'Something went wrong'

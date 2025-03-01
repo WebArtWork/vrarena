@@ -20,19 +20,44 @@
 					<div class="documents-main-row" *ngIf="show === 'date'">
 						<winput
 							*ngFor="let time of times"
-							[disabled]="!!bookingByDateTime[date+time]"
+							[disabled]="!!reservationsByDateTime[reservation.date+time]"
 							(wChange)="setTime(time, $event)"
+							class="book-input"
 							type="checkbox"
 							[label]="time"
-							class="book-input"
 						></winput>
+						<winput
+							(wChange)="reservation.name = $event + ''"
+							[value]="userService.user.name"
+							placeholder="Ваше імя"
+							class="book-input"
+							label="Імя"
+						></winput>
+						<winput
+							(wChange)="reservation.phone = $event + ''"
+							[value]="userService.user.phone"
+							placeholder="Ваше телефрон"
+							class="book-input"
+							label="Телефрон"
+						></winput>
+						<winput
+							(wChange)="reservation.notes = $event + ''"
+							placeholder="Додаткова інформація"
+							class="book-input"
+							label="Інформація"
+						></winput>
+
 						<wbutton
-							[disabled]="!selectedTimes.length"
-							(wClick)="show = 'booked'; book()"
-							>Забронювати</wbutton
+							[disabled]="!reservation.times.length"
+							(wClick)="book()"
 						>
+							<span translate>Common.Book</span>
+						</wbutton>
 					</div>
-					<div class="documents-main-row book-finish" *ngIf="show === 'booked'">
+					<div
+						class="documents-main-row book-finish"
+						*ngIf="show === 'booked'"
+					>
 						<div>
 							Ваше прохання щодо бронювання на обрану годину
 							прийнято. Наш менеджер зв'яжеться з вами найближчим

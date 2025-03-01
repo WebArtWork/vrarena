@@ -10,7 +10,6 @@
 	}
 	&__stard-day {
 		text-align: center;
-		color: var(--c-text-primary);
 	}
 	&__day {
 		flex: 1;
@@ -88,7 +87,6 @@
 .calendar-nav {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 	&-year {
 		display: flex;
 		align-items: center;
@@ -101,7 +99,7 @@
 				cursor: pointer;
 				svg {
 					path {
-						fill: var(--day-name)
+						fill: var(--c-primary);
 					}
 				}
 			}
@@ -109,7 +107,7 @@
 				cursor: pointer;
 				svg {
 					path {
-						fill: var(--day-name);
+						fill: var(--c-primary);
 					}
 				}
 			}
@@ -117,7 +115,6 @@
 		&__data {
 			margin: 0 15px;
 			font-size: 20px;
-			color: var(--c-text-primary);
 			span {
 				&:last-child {
 					margin-left: 10px;

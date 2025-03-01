@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CalendarDate } from 'src/app/core/modules/calendar/calendar.interface';
 import { Value } from 'src/app/core/modules/input/input.component';
-import { Cybersportbook } from 'src/app/modules/cybersportbook/interfaces/cybersportbook.interface';
-import { CybersportbookService } from 'src/app/modules/cybersportbook/services/cybersportbook.service';
+import { Cybersportreservation } from 'src/app/modules/cybersportreservation/interfaces/cybersportreservation.interface';
+import { CybersportreservationService } from 'src/app/modules/cybersportreservation/services/cybersportreservation.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 
 @Component({
@@ -11,11 +11,9 @@ import { UserService } from 'src/app/modules/user/services/user.service';
 	standalone: false
 })
 export class BookComponent {
+	reservation: Cybersportreservation = this._reservationService.new();
+
 	show: 'calendar' | 'date' | 'booked' = 'calendar';
-
-	date = `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`;
-
-	yearmonth: string;
 
 	times = [
 		'08:00 - 09:00',
@@ -34,47 +32,56 @@ export class BookComponent {
 		'21:00 - 22:00'
 	];
 
-	bookings: Cybersportbook[] = [];
+	reservations: Cybersportreservation[] = [];
 
-	bookingByDateTime: Record<string, Cybersportbook> = {};
+	reservationsByDateTime: Record<string, Cybersportreservation> = {};
 
 	constructor(
-		private _bookService: CybersportbookService,
+		private _reservationService: CybersportreservationService,
 		public userService: UserService
 	) {
+		this.reservation.date = `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`;
+
+		this.reservation.times = [];
+
 		this.load();
 	}
 
 	load(): void {
-		const date = this.date.split('.');
+		const date = this.reservation.date.split('.');
 
 		date.pop();
 
-		if (this.yearmonth === date.join('.')) {
+		if (this.reservation.yearmonth === date.join('.')) {
 			return;
 		}
 
-		this.yearmonth = date.join('.');
+		this.reservation.yearmonth = date.join('.');
 
-		this._bookService
-			.get({ query: 'yearmonth=' + this.yearmonth })
-			.subscribe((bookings) => {
-				this.bookings = bookings;
+		this._reservationService
+			.get({ query: 'yearmonth=' + this.reservation.yearmonth })
+			.subscribe((reservations) => {
+				this.reservations = reservations;
 
-				this.bookingByDateTime = {};
+				this.reservationsByDateTime = {};
 
-				for (const booking of bookings) {
+				for (const booking of reservations) {
 					for (const time of booking.times) {
-						this.bookingByDateTime[booking.date + time] = booking;
+						this.reservationsByDateTime[booking.date + time] =
+							booking;
 					}
 				}
 			});
 	}
 
 	book(): void {
-		// this._bookService.create({
-		// 	times: this.selectedTimes
-		// });
+		console.log(this);
+
+		this._reservationService
+			.create(this.reservation)
+			.subscribe((reservation) => {
+				this.show = 'booked';
+			});
 	}
 
 	back(): void {
@@ -84,18 +91,20 @@ export class BookComponent {
 	setDate(date: string): void {
 		this.show = 'date';
 
-		this.date = date;
+		this.reservation.date = date;
 
 		this.load();
 	}
 
 	setTime(time: string, value: Value): void {
+		this.reservation.times = this.reservation.times || [];
+
 		if (value) {
-			this.selectedTimes.push(time);
+			this.reservation.times.push(time);
 		} else {
-			this.selectedTimes = this.selectedTimes.filter((t) => t !== time);
+			this.reservation.times = this.reservation.times.filter(
+				(t) => t !== time
+			);
 		}
 	}
-
-	selectedTimes: string[] = [];
 }

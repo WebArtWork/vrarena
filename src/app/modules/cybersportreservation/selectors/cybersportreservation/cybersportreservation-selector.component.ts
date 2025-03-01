@@ -4,7 +4,7 @@ import {
 	Component,
 	OnChanges,
 	Output,
-	Input
+	Input,
 } from '@angular/core';
 import { SelectModule } from 'src/app/core/modules/select/select.module';
 import { CybersportreservationService } from '../../services/cybersportreservation.service';
@@ -14,9 +14,9 @@ import { Cybersportreservation } from '../../interfaces/cybersportreservation.in
 	selector: 'cybersportreservation-selector',
 	templateUrl: './cybersportreservation-selector.component.html',
 	styleUrls: ['./cybersportreservation-selector.component.scss'],
-	imports: [SelectModule]
+	imports: [SelectModule],
 })
-export class SelectUserComponent implements OnChanges {
+export class CybersportreservationSelectorComponent implements OnChanges {
 	@Input() value: string;
 
 	@Output() wChange = new EventEmitter();

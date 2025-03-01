@@ -3,12 +3,12 @@ import { Cybersportreservation } from '../interfaces/cybersportreservation.inter
 import { CrudService } from 'wacom';
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: 'root',
 })
 export class CybersportreservationService extends CrudService<Cybersportreservation> {
 	constructor() {
 		super({
-			name: 'cybersportreservation'
+			name: 'cybersportreservation',
 		});
 	}
 }

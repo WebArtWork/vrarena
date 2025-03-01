@@ -119,6 +119,39 @@ const routes: Routes = [
 	{
 		path: '',
 		component: PublicComponent,
+		canActivate: [AuthenticatedGuard],
+		children: [
+			{
+				path: 'reservations',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Reservations'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./pages/user/reservations/reservations.module'
+					).then((m) => m.ReservationsModule)
+			},
+			{
+				path: 'profile',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'My Profile'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/profile/profile.module').then(
+						(m) => m.ProfileModule
+					)
+			}
+		]
+	},
+	{
+		path: '',
+		component: PublicComponent,
 		children: [
 			{
 				path: 'book',
@@ -207,26 +240,6 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
-				path: 'bookings',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Bookings'
-					}
-				},
-				loadChildren: () => import('./pages/user/bookings/bookings.module').then(m => m.BookingsModule)
-			}, 
-			{
-				path: 'bookings',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Bookings'
-					}
-				},
-				loadChildren: () => import('./modules/cybersportbook/pages/bookings/bookings.module').then(m => m.BookingsModule)
-			}, 
-			{
 				path: 'files',
 				canActivate: [MetaGuard],
 				data: {
@@ -238,19 +251,6 @@ const routes: Routes = [
 					import('./modules/file/pages/files/files.module').then(
 						(m) => m.FilesModule
 					)
-			},
-			{
-				path: 'reservations',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Reservations'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./pages/user/reservations/reservations.module'
-					).then((m) => m.ReservationsModule)
 			},
 			{
 				path: 'sessions',
@@ -289,19 +289,6 @@ const routes: Routes = [
 				loadChildren: () =>
 					import('./pages/user/dashboard/dashboard.module').then(
 						(m) => m.DashboardModule
-					)
-			},
-			{
-				path: 'profile',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'My Profile'
-					}
-				},
-				loadChildren: () =>
-					import('./pages/user/profile/profile.module').then(
-						(m) => m.ProfileModule
 					)
 			}
 		]
