@@ -9,7 +9,19 @@ export const environment = {
 			'An amazing place where you enjoy your time playing VR games with friends',
 		icon: 'https://webart.work/api/user/cdn/waw-logo.png'
 	},
-	defaultLanguageCode: 'ua',
+	defaultLanguage: 'uk',
+	languages: [
+		{
+			code: 'en',
+			name: 'English',
+			origin: 'English'
+		},
+		{
+			code: 'uk',
+			name: 'Українська',
+			origin: 'Українська'
+		}
+	],
 	sign: {
 		email: '',
 		password: ''

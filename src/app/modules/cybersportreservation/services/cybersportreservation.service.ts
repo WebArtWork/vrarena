@@ -3,12 +3,19 @@ import { Cybersportreservation } from '../interfaces/cybersportreservation.inter
 import { CrudService } from 'wacom';
 
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class CybersportreservationService extends CrudService<Cybersportreservation> {
 	constructor() {
 		super({
 			name: 'cybersportreservation',
+			replace: (doc) => {
+				doc.status = doc.status || 'New';
+			}
 		});
+	}
+
+	yearmonth(): string {
+		return `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`;
 	}
 }

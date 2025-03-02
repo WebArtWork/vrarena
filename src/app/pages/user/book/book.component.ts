@@ -40,7 +40,7 @@ export class BookComponent {
 		private _reservationService: CybersportreservationService,
 		public userService: UserService
 	) {
-		this.reservation.date = `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`;
+		this.reservation.date = this._reservationService.yearmonth();
 
 		this.reservation.times = [];
 

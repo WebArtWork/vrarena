@@ -122,19 +122,6 @@ const routes: Routes = [
 		canActivate: [AuthenticatedGuard],
 		children: [
 			{
-				path: 'reservations',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Reservations'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./pages/user/reservations/reservations.module'
-					).then((m) => m.ReservationsModule)
-			},
-			{
 				path: 'profile',
 				canActivate: [MetaGuard],
 				data: {
@@ -153,6 +140,19 @@ const routes: Routes = [
 		path: '',
 		component: PublicComponent,
 		children: [
+			{
+				path: 'reservations',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Reservations'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./pages/user/reservations/reservations.module'
+					).then((m) => m.ReservationsModule)
+			},
 			{
 				path: 'book',
 				canActivate: [MetaGuard],

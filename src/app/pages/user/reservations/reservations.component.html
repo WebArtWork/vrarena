@@ -19,29 +19,87 @@
 			</div>
 			<div class="documents-main documents-main--nobar">
 				<div class="documents-main-content">
-					<div class="documents-main-row" *ngFor="let book of []">
+					<div
+						*ngIf="!reservations?.length"
+						class="documents-main-row"
+					>
+						<div class="documents__title bookings-title" translate>
+							Common.You don't have reserervations yet
+						</div>
+					</div>
+
+					<div
+						*ngFor="let reservation of reservations"
+						class="documents-main-row"
+					>
 						<div class="documents__title bookings-title">
 							<span translate>Common.Reservation</span>
-							<!-- <span>#1</span> -->
+							<span> - </span>
+							<span
+								>{{'Status.' + reservation.status |
+								translate}}</span
+							>
+							<ng-container
+								*ngIf="isManager && reservation.status === 'New'"
+							>
+								<i
+									class="material-icons"
+									(click)="reservation.status = 'Confirmed'"
+									>check_circle</i
+								>
+								<i
+									class="material-icons"
+									(click)="reservation.status = 'Denied'"
+									>cancel</i
+								>
+							</ng-container>
 						</div>
 						<div class="bookings-list">
-							<div class="bookings__item">
-								<div class="bookings__icon">
-									<i class="material-icons">hourglass_top</i>
-								</div>
-								<div class="bookings__text">
-									Час: <span>23 : 00</span>
-								</div>
-							</div>
 							<div class="bookings__item">
 								<div class="bookings__icon">
 									<i class="material-icons">date_range</i>
 								</div>
 								<div class="bookings__text">
-									Дата: <span>00.00.0000</span>
+									Дата:
+									<span
+										>{{ reservation.date | date:
+										'dd.MM.yyyy' }}
+									</span>
 								</div>
 							</div>
 							<div class="bookings__item">
+								<div class="bookings__icon">
+									<i class="material-icons">hourglass_top</i>
+								</div>
+								<div class="bookings__text">
+									Час:
+									<span>{{reservation.times | times}}</span>
+								</div>
+							</div>
+							<div class="bookings__item" *ngIf="isManager">
+								<div class="bookings__icon">
+									<i class="material-icons">person</i>
+								</div>
+								<div class="bookings__text">
+									Імя:
+									<span>{{reservation.name}}</span>
+								</div>
+							</div>
+							<div class="bookings__item" *ngIf="isManager">
+								<div class="bookings__icon">
+									<i class="material-icons">phone</i>
+								</div>
+								<div class="bookings__text">
+									Телефон:
+									<a href="tel:{{reservation.phone}}"
+										>{{reservation.phone}}</a
+									>
+								</div>
+							</div>
+							<div
+								*ngIf="reservation.game"
+								class="bookings__item"
+							>
 								<div class="bookings__icon">
 									<i class="material-icons">sports_esports</i>
 								</div>
@@ -54,7 +112,11 @@
 									<i class="material-icons">payments</i>
 								</div>
 								<div class="bookings__text">
-									Ціна: <span>500грн</span>
+									Ціна:
+									<span
+										>{{reservation.times.length *
+										1000}}грн</span
+									>
 								</div>
 							</div>
 						</div>

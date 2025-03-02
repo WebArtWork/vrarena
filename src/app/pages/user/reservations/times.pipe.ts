@@ -13,6 +13,7 @@ export class TimesPipe implements PipeTransform {
 
 		for (let i = 1; i < ranges.length; i++) {
 			const prevEnd = merged[merged.length - 1][1];
+
 			const currStart = ranges[i][0];
 
 			if (prevEnd === currStart) {
