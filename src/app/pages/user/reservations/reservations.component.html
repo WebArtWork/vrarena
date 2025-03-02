@@ -44,12 +44,18 @@
 							>
 								<i
 									class="material-icons"
-									(click)="reservation.status = 'Confirmed'"
+									(click)="
+										reservation.status = 'Confirmed';
+										update(reservation)
+									"
 									>check_circle</i
 								>
 								<i
 									class="material-icons"
-									(click)="reservation.status = 'Denied'"
+									(click)="
+										reservation.status = 'Denied';
+										update(reservation)
+									"
 									>cancel</i
 								>
 							</ng-container>

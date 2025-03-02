@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Cybersportreservation } from 'src/app/modules/cybersportreservation/interfaces/cybersportreservation.interface';
 import { CybersportreservationService } from 'src/app/modules/cybersportreservation/services/cybersportreservation.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 
@@ -12,19 +13,19 @@ export class ReservationsComponent {
 	// in case of manager we will see reservations of today and status new
 	isManager = this._router.url.includes('manager');
 
-	reservations = this.isManager ? [] : this.reservationService.getDocs();
+	reservations = this.isManager ? [] : this._reservationService.getDocs();
 
 	constructor(
-		public reservationService: CybersportreservationService,
+		public _reservationService: CybersportreservationService,
 		public userService: UserService,
 		private _router: Router
 	) {
 		if (this.isManager) {
-			this.reservationService
+			this._reservationService
 				.get(
 					{
 						query:
-							'yearmonth=' + this.reservationService.yearmonth()
+							'yearmonth=' + this._reservationService.yearmonth()
 					},
 					{
 						name: 'public'
@@ -34,8 +35,12 @@ export class ReservationsComponent {
 					this.reservations = reservations;
 				});
 		} else {
-			this.reservationService.get();
+			this._reservationService.get();
 		}
+	}
+
+	update(reservation: Cybersportreservation): void {
+		this._reservationService.update(reservation);
 	}
 
 	back(): void {
