@@ -75,13 +75,19 @@ export class BookComponent {
 	}
 
 	book(): void {
-		console.log(this);
+		if (!this.userService.user.name || !this.userService.user.phone) {
+			this.userService.user.name =
+				this.userService.user.name || this.reservation.name;
 
-		this._reservationService
-			.create(this.reservation)
-			.subscribe((reservation) => {
-				this.show = 'booked';
-			});
+			this.userService.user.phone =
+				this.userService.user.phone || this.reservation.phone;
+
+			this.userService.updateMe();
+		}
+
+		this._reservationService.create(this.reservation).subscribe(() => {
+			this.show = 'booked';
+		});
 	}
 
 	back(): void {
