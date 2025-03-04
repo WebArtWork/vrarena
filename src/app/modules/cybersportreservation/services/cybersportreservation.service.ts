@@ -16,6 +16,10 @@ export class CybersportreservationService extends CrudService<Cybersportreservat
 	}
 
 	yearmonth(): string {
+		return `${new Date().getFullYear()}.${new Date().getMonth()}`;
+	}
+
+	date(): string {
 		return `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`;
 	}
 }

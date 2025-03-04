@@ -13,7 +13,7 @@ import { UserService } from 'src/app/modules/user/services/user.service';
 export class BookComponent {
 	reservation: Cybersportreservation = this._reservationService.new();
 
-	show: 'calendar' | 'date' | 'booked' = 'calendar';
+	show: 'calendar' | 'date' | 'booked' = 'date';
 
 	times = [
 		'08:00 - 09:00',
@@ -40,11 +40,17 @@ export class BookComponent {
 		private _reservationService: CybersportreservationService,
 		public userService: UserService
 	) {
-		this.reservation.date = this._reservationService.yearmonth();
+		this.reservation.date = this._reservationService.date();
+
+		this.reservation.yearmonth = this._reservationService.yearmonth();
 
 		this.reservation.times = [];
 
 		this.load();
+
+		this.reservation.name = this.userService.user.name;
+
+		this.reservation.phone = this.userService.user.phone;
 	}
 
 	load(): void {
@@ -98,6 +104,12 @@ export class BookComponent {
 		this.show = 'date';
 
 		this.reservation.date = date;
+
+		const yearmonth = date.split('.');
+
+		yearmonth.unshift();
+
+		this.reservation.yearmonth = yearmonth.join('.');
 
 		this.load();
 	}

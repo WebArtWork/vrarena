@@ -18,6 +18,12 @@
 						<wcalendar (dateClicked)="setDate($event)"></wcalendar>
 					</div>
 					<div class="documents-main-row" *ngIf="show === 'date'">
+						<span>{{reservation.date | date: 'dd.MM.yyyy'}}</span>
+
+						<wbutton (click)="show = 'calendar'" translate
+							>Common.Change Date</wbutton
+						>
+
 						<winput
 							*ngFor="let time of times"
 							[disabled]="!!reservationsByDateTime[reservation.date+time]"
@@ -46,9 +52,9 @@
 							class="book-input"
 							label="Інформація"
 						></winput>
-
 						<wbutton
-							[disabled]="!reservation.times.length"
+							[class.disabled]="!reservation.times.length || !reservation.name || !reservation.phone"
+							[disabled]="!reservation.times.length || !reservation.name || !reservation.phone"
 							(wClick)="book()"
 						>
 							<span translate>Common.Book</span>
