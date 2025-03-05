@@ -1,0 +1,1 @@
+import{hb as r,r as e}from"./chunk-5QS6TA7V.js";var a=(()=>{class t extends r{constructor(){super({name:"cybersportgame"}),this.games=this.getDocs(),this.get()}static{this.\u0275fac=function(o){return new(o||t)}}static{this.\u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{a};
