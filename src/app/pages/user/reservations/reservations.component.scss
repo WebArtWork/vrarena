@@ -21,6 +21,10 @@
 			color: var(--violet);
 			font-weight: 600;
 		}
+		a{
+			color: var(--violet);
+			font-weight: 600;
+		}
 	}
 }
 .bookings-title {
@@ -29,7 +33,26 @@
 	padding: 0 0 0 0;
 	margin-bottom: 20px;
 	span {
-		color: var(--violet);
+		color: var(--c-text-primary);
+	}
+	display: flex;
+	align-items: center;
+	&-icons{
+		display: flex;
+		margin-left: 10px;
+		i{
+			margin: 0 5px;
+		}
+		.green{
+			background: linear-gradient(45deg, #34d399, #059669);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		.red{
+			background: linear-gradient(45deg, #e33e3e, #b63d3d);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
 	}
 }
 .bookings-winner {
@@ -47,5 +70,25 @@
 		padding-left: 10px;
 		font-size: 18px;
 		font-weight: 600;
+	}
+}
+
+@media screen and (max-width: 479px) {
+	.bookings-title{
+		font-size: 18px;
+	}
+	.bookings__text{
+		font-size: 16px;
+		span{
+			font-weight: 500;
+		}
+		a{
+			font-weight: 500;
+		}
+	}
+	.bookings__icon{
+		i{
+			font-size: 20px;
+		}
 	}
 }

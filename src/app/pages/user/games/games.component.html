@@ -34,11 +34,9 @@
 									class="documents-text__description"
 									[innerHTML]="game.shortDescription"
 								></div>
-								<div class="game-additions cursor-pointer">
+								<div class="game-additions cursor-pointer" *ngIf="game.trailer" (click)="$event.stopPropagation(); openVideo(game.trailer)">
 									<i
-									(click)="$event.stopPropagation(); openVideo(game.trailer)"
 									class="material-icons"
-									*ngIf="game.trailer"
 									>videocam</i>
 									<span>Клікай, для ознайомлення з грою</span>
 								</div>
