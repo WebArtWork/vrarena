@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CalendarDate } from 'src/app/core/modules/calendar/calendar.interface';
 import { Value } from 'src/app/core/modules/input/input.component';
+import { CybersportgameService } from 'src/app/modules/cybersportgame/services/cybersportgame.service';
 import { Cybersportreservation } from 'src/app/modules/cybersportreservation/interfaces/cybersportreservation.interface';
 import { CybersportreservationService } from 'src/app/modules/cybersportreservation/services/cybersportreservation.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
@@ -11,6 +13,10 @@ import { UserService } from 'src/app/modules/user/services/user.service';
 	standalone: false
 })
 export class BookComponent {
+	game = this._router.url.includes('/book/')
+		? this._gameService.getByRrlOrId(this._router.url.replace('/book/', ''))
+		: null;
+
 	reservation: Cybersportreservation = this._reservationService.new();
 
 	show: 'calendar' | 'date' | 'booked' = 'date';
@@ -38,7 +44,9 @@ export class BookComponent {
 
 	constructor(
 		private _reservationService: CybersportreservationService,
-		public userService: UserService
+		private _gameService: CybersportgameService,
+		public userService: UserService,
+		private _router: Router
 	) {
 		this.reservation.date = this._reservationService.date();
 

@@ -8,6 +8,10 @@ const routes: Routes = [
 	{
 		path: '',
 		component: BookComponent
+	},
+	{
+		path: ':urlOrID',
+		component: BookComponent
 	}
 ];
 

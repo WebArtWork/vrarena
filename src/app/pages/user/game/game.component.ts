@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Cybersportgame } from 'src/app/modules/cybersportgame/interfaces/cybersportgame.interface';
 import { CybersportgameService } from 'src/app/modules/cybersportgame/services/cybersportgame.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { environment } from 'src/environments/environment';
@@ -12,7 +13,9 @@ import { environment } from 'src/environments/environment';
 export class GameComponent {
 	readonly url = environment.url;
 
-	game = this._gameService.doc(this._router.url.replace('/game/', ''));
+	game = this._gameService.getByRrlOrId(
+		this._router.url.replace('/game/', '')
+	);
 
 	isMenuOpen = false;
 

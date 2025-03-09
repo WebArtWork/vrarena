@@ -79,6 +79,16 @@ export class GamesComponent {
 		},
 		buttons: [
 			{
+				icon: 'cloud_download',
+				click: (doc: Cybersportgame): void => {
+					this._form.modalUnique<Cybersportgame>(
+						'cybersportgame',
+						'url',
+						doc
+					);
+				}
+			},
+			{
 				icon: 'arrow_upward',
 				click: (doc: Cybersportgame): void => {
 					const index = this.rows.findIndex((d) => d._id === doc._id);

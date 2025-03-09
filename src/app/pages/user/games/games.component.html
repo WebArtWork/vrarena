@@ -16,7 +16,7 @@
 				<div class="documents-main-content">
 					<div
 						*ngFor="let game of games"
-						routerLink="/game/{{game._id}}"
+						routerLink="/game/{{game.url || game._id}}"
 						class="documents-main-row"
 					>
 						<div class="documents-wrap">
@@ -34,28 +34,41 @@
 									class="documents-text__description"
 									[innerHTML]="game.shortDescription"
 								></div>
-								<div class="game-additions cursor-pointer" *ngIf="game.trailer" (click)="$event.stopPropagation(); openVideo(game.trailer)">
-									<i
-									class="material-icons"
-									>videocam</i>
+								<div
+									class="game-additions cursor-pointer"
+									*ngIf="game.trailer"
+									(click)="$event.stopPropagation(); openVideo(game.trailer)"
+								>
+									<i class="material-icons">videocam</i>
 									<span>Клікай, для ознайомлення з грою</span>
 								</div>
 
-								<div *ngIf="game.isMultiplayer" class="game-additions">
+								<div
+									*ngIf="game.isMultiplayer"
+									class="game-additions"
+								>
 									<i class="material-icons">groups</i>
 									<span>Можна грати з іншими людьми</span>
 								</div>
-								<div *ngIf="game.isStanding" class="game-additions">
+								<div
+									*ngIf="game.isStanding"
+									class="game-additions"
+								>
 									<i class="material-icons"
 										>accessibility_new</i
 									>
 									<span>Можна грати стоячи</span>
 								</div>
-								<div *ngIf="game.isSitting" class="game-additions">
+								<div
+									*ngIf="game.isSitting"
+									class="game-additions"
+								>
 									<i class="material-icons">event_seat</i>
 									<span>Можна грати сидячи</span>
 								</div>
-								<div class="game-years">Вік: {{game.afterAge || 18}}+</div>
+								<div class="game-years">
+									Вік: {{game.afterAge || 18}}+
+								</div>
 								<div
 									*ngIf="game.maxPlayers && game.maxPlayers > 1"
 								>
