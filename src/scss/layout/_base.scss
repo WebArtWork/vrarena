@@ -361,6 +361,7 @@ wform {
 			height: 100%;
 			overflow-y: scroll;
 			scrollbar-width: none;
+			position: relative;
 			&::-webkit-scrollbar {
 				width: 0px; /* Для вертикальной полосы прокрутки */
 				height: 0px; /* Для горизонтальной полосы прокрутки */
