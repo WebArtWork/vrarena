@@ -120,7 +120,7 @@ textarea.error {
 		height: 26px;
 		display: inline-block;
 		border-radius: 4px;
-		background-color: var(--c-primary);
+		background: var(--events);
 		transform: scale(1);
 		border: 1px solid var(--c-border);
 		transition: var(--transition);
@@ -238,4 +238,10 @@ textarea.error {
 .check-text{
     margin-left: 0;
     line-height: 0;
+}
+
+@media screen and (max-width: 479px) {
+		.check-label .form-label{
+			font-size: 14px;
+		}
 }

@@ -2,11 +2,38 @@
     margin-bottom: 6px;
     display: block;
     color: var(--c-text-primary);
+    flex: 0 0 50%;
     &:last-child{
         margin-bottom: 0;
     }
-}
+    .check-label .form-label{
+        font-size: 14px;
+    }
 
+}
+.book{
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        &-date{
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--c-text-primary);
+        }
+        &-btn{
+            max-width: 200px;
+            background: transparent !important;
+            border: 2px solid #8d7ccaa8;
+        }
+    }
+    &__time{
+        display: flex;
+        flex-flow: row wrap;
+        max-width: 510px;
+    }
+}
 .book-finish{
     text-align: center;
     div{
@@ -25,5 +52,16 @@
         width: fit-content;
         margin: 0 auto;
         padding: 10px 0 8px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .check-label .form-label{
+        font-size: 14px;
+    }
+    .book__header-btn{
+        width: 150px !important;
+        height: 40px !important;
+        padding: 0 !important;
     }
 }
