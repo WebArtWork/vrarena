@@ -43,7 +43,46 @@
 						/>
 					</div>
 					<div class="documents-sidebar__title">{{game.name}}</div>
-					<!-- add here all minor details -->
+					<div
+					class="game-additions cursor-pointer"
+					*ngIf="game.trailer"
+					(click)="$event.stopPropagation(); openVideo(game.trailer)"
+				>
+					<i class="material-icons">videocam</i>
+					<span>Клікай, для ознайомлення з грою</span>
+				</div>
+
+				<div
+					*ngIf="game.isMultiplayer"
+					class="game-additions"
+				>
+					<i class="material-icons">groups</i>
+					<span>Можна грати з іншими людьми</span>
+				</div>
+				<div
+					*ngIf="game.isStanding"
+					class="game-additions"
+				>
+					<i class="material-icons"
+						>accessibility_new</i
+					>
+					<span>Можна грати стоячи</span>
+				</div>
+				<div
+					*ngIf="game.isSitting"
+					class="game-additions"
+				>
+					<i class="material-icons">event_seat</i>
+					<span>Можна грати сидячи</span>
+				</div>
+				<div class="game-years">
+					Вік: {{game.afterAge || 18}}+
+				</div>
+				<div
+					*ngIf="game.maxPlayers && game.maxPlayers > 1"
+				>
+					Гравці: 1-{{game.maxPlayers}}
+				</div>
 				</div>
 			</div>
 			<div class="documents-main">

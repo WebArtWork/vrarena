@@ -1,0 +1,28 @@
+.game-additions{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+    i{
+        margin-right: 10px;
+        background: linear-gradient(291deg, #c74662 40%, #7251ea 105%);
+        padding: 5px;
+        border-radius: 6px;
+    }
+    span{
+        color:var(--c-text-primary);
+        line-height: 1.2;
+    }
+}
+.game-years{
+    padding: 5px 10px;
+    background: linear-gradient(70deg, #c74662 -3.5%, #51daea 100%);
+    width: fit-content;
+    margin-left: auto;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 800;
+}
+.documents-sidebar__title{
+    margin-bottom: 10px;
+}

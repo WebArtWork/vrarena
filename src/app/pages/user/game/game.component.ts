@@ -18,13 +18,23 @@ export class GameComponent {
 	);
 
 	isMenuOpen = false;
-
+	games: Cybersportgame[] = [];
 	constructor(
 		private _gameService: CybersportgameService,
 		public userService: UserService,
 		private _router: Router
-	) {}
+	) {
+		this._gameService
+			.get({}, { name: 'public' })
+			.subscribe((games) => (this.games = games));
+	}
+	openVideo(url: string): void {
+		const newWindow = window.open(url, '_blank');
 
+		if (newWindow) {
+			newWindow.focus();
+		}
+	}
 	back(): void {
 		window.history.back();
 	}
