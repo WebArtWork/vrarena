@@ -15,26 +15,34 @@
 			<div class="documents-main documents-main--nobar">
 				<div class="documents-main-content">
 					<div class="documents-main-row" *ngIf="show === 'calendar'">
-						<wcalendar (dateClicked)="setDate($event)"></wcalendar>
+						<wcalendar
+							(todayClicked)="setDate($event)"
+							(dateClicked)="setDate($event)"
+						></wcalendar>
 					</div>
 					<div class="documents-main-row" *ngIf="show === 'date'">
 						<div class="book__header">
-							<span class="book__header-date">{{reservation.date | date: 'dd.MM.yyyy'}}</span>
+							<span class="book__header-date"
+								>{{reservation.date | date: 'dd.MM.yyyy'}}</span
+							>
 
-						<wbutton class="w-btn _primary book__header-btn" (click)="show = 'calendar'" translate
-							>Common.Change Date</wbutton
-						>
+							<wbutton
+								class="w-btn _primary book__header-btn"
+								(click)="show = 'calendar'"
+								translate
+								>Common.Change Date</wbutton
+							>
 						</div>
 
 						<div class="book__time">
 							<winput
-							*ngFor="let time of times"
-							[disabled]="!!reservationsByDateTime[reservation.date+time]"
-							(wChange)="setTime(time, $event)"
-							class="book-input"
-							type="checkbox"
-							[label]="time"
-						></winput>
+								*ngFor="let time of times"
+								[disabled]="!!reservationsByDateTime[reservation.date+time]"
+								(wChange)="setTime(time, $event)"
+								class="book-input"
+								type="checkbox"
+								[label]="time"
+							></winput>
 						</div>
 						<winput
 							(wChange)="reservation.name = $event + ''"

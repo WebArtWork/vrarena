@@ -1,6 +1,8 @@
 <div class="calendar-nav">
 	<div class="calendar-nav__today">
-		<wbutton (click)="setNow()">Сьогодні</wbutton>
+		<wbutton (click)="setNow(); todayClicked.emit(selectedDate)"
+			>Сьогодні</wbutton
+		>
 	</div>
 	<div class="calendar-nav-year">
 		<div class="calendar-nav-year__buttons">
@@ -63,7 +65,7 @@
 				<div>
 					<div
 						class="calendar-events"
-						*ngFor="let appointment of eventsByDate[toDate(previousYear, previousMonth, startDay +
+						*ngFor="let appointment of eventsByDate[toDate(previousYear, previousMonth+1, startDay +
 					day)]"
 						(click)="eventClicked(appointment); $event.stopPropagation()"
 					>
@@ -163,7 +165,7 @@
 				<div>
 					<div
 						class="calendar-events"
-						*ngFor="let appointment of eventsByDate[toDate(nextYear, nextMonth, day - keepDays)]"
+						*ngFor="let appointment of eventsByDate[toDate(nextYear, nextMonth+1, day - keepDays)]"
 						(click)="eventClicked(appointment); $event.stopPropagation()"
 					>
 						<!-- <span class="calendar-events__text"
