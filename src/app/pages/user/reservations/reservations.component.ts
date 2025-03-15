@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Cybersportreservation } from 'src/app/modules/cybersportreservation/interfaces/cybersportreservation.interface';
 import { CybersportreservationService } from 'src/app/modules/cybersportreservation/services/cybersportreservation.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
+import { CoreService } from 'wacom';
 
 @Component({
 	templateUrl: './reservations.component.html',
@@ -18,14 +19,14 @@ export class ReservationsComponent {
 	constructor(
 		public _reservationService: CybersportreservationService,
 		public userService: UserService,
+		private _core: CoreService,
 		private _router: Router
 	) {
 		if (this.isManager) {
 			this._reservationService
 				.get(
 					{
-						query:
-							'yearmonth=' + this._reservationService.yearmonth()
+						query: `yearmonth=${this._reservationService.yearmonth()}`
 					},
 					{
 						name: 'public'
@@ -35,7 +36,9 @@ export class ReservationsComponent {
 					this.reservations = reservations;
 				});
 		} else {
-			this._reservationService.get();
+			this._reservationService.get({
+				query: `deviceID=${this._core.deviceID}`
+			});
 		}
 	}
 

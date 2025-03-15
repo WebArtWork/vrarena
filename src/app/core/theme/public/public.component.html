@@ -5,7 +5,7 @@
 				<a class="nav__a">
 					<span
 						class="material-icons"
-						(click)="us.setMode(us.mode ? '' : 'dark')"
+						(click)="us.setMode(us.mode === 'dark' ? 'white' : 'dark')"
 						>{{us.mode ? 'light_mode': 'dark_mode'}}</span
 					>
 				</a>
@@ -42,6 +42,15 @@
 			<li class="nav__li">
 				<a
 					routerLinkActive="_activeLink"
+					routerLink="/profile"
+					class="nav__a"
+				>
+					<span class="material-icons">person</span>
+				</a>
+			</li>
+			<li class="nav__li">
+				<a
+					routerLinkActive="_activeLink"
 					routerLink="/reservations"
 					class="nav__a"
 				>
@@ -66,7 +75,10 @@
 					<span class="material-icons">schedule</span>
 				</a>
 			</li>
-			<li class="nav__li">
+			<li
+				*ngIf="us.role('admin') || us.role('cybersportmanager')"
+				class="nav__li"
+			>
 				<a
 					routerLinkActive="_activeLink"
 					routerLink="/reservations/manager"

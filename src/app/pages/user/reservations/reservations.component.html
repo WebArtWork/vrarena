@@ -42,24 +42,24 @@
 							<ng-container
 								*ngIf="isManager && reservation.status === 'New'"
 							>
-							<div class="bookings-title-icons">
-								<i
-								class="material-icons green"
-								(click)="
+								<div class="bookings-title-icons">
+									<i
+										class="material-icons green"
+										(click)="
 									reservation.status = 'Confirmed';
 									update(reservation)
 								"
-								>check_circle</i
-							>
-							<i
-								class="material-icons red"
-								(click)="
+										>check_circle</i
+									>
+									<i
+										class="material-icons red"
+										(click)="
 									reservation.status = 'Denied';
 									update(reservation)
 								"
-								>cancel</i
-							>
-							</div>
+										>cancel</i
+									>
+								</div>
 							</ng-container>
 						</div>
 						<div class="bookings-list">

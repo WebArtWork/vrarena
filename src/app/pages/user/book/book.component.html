@@ -45,21 +45,22 @@
 							></winput>
 						</div>
 						<winput
-							(wChange)="reservation.name = $event + ''"
-							[value]="userService.user.name"
+							(wChange)="reservation.name = $event + ''; update()"
+							[value]="userService.user.name || reservation.name"
 							placeholder="Ваше ім`я"
 							class="book-input"
 							label="Ім`я"
 						></winput>
 						<winput
-							(wChange)="reservation.phone = $event + ''"
-							[value]="userService.user.phone"
+							(wChange)="reservation.phone = $event + ''; update()"
+							[value]="userService.user.phone || reservation.phone"
 							placeholder="Ваш телефон"
 							class="book-input"
 							label="Телефон"
 						></winput>
 						<winput
-							(wChange)="reservation.notes = $event + ''"
+							(wChange)="reservation.notes = $event + ''; update()"
+							[value]="reservation.notes"
 							placeholder="Додаткова інформація"
 							class="book-input"
 							label="Інформація"

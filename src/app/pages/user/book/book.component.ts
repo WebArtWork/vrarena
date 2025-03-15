@@ -6,6 +6,7 @@ import { CybersportgameService } from 'src/app/modules/cybersportgame/services/c
 import { Cybersportreservation } from 'src/app/modules/cybersportreservation/interfaces/cybersportreservation.interface';
 import { CybersportreservationService } from 'src/app/modules/cybersportreservation/services/cybersportreservation.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
+import { CoreService, StoreService } from 'wacom';
 
 @Component({
 	templateUrl: './book.component.html',
@@ -22,8 +23,6 @@ export class BookComponent {
 	show: 'calendar' | 'date' | 'booked' = 'date';
 
 	times = [
-		'08:00 - 09:00',
-		'09:00 - 10:00',
 		'10:00 - 11:00',
 		'11:00 - 12:00',
 		'12:00 - 13:00',
@@ -46,19 +45,40 @@ export class BookComponent {
 		private _reservationService: CybersportreservationService,
 		private _gameService: CybersportgameService,
 		public userService: UserService,
+		private _core: CoreService,
+		private _store: StoreService,
 		private _router: Router
 	) {
-		this.reservation.date = this._reservationService.date();
+		if (this.userService.user.email) {
+			this.reservation.date = this._reservationService.date();
 
-		this.reservation.yearmonth = this._reservationService.yearmonth();
+			this.reservation.yearmonth = this._reservationService.yearmonth();
 
-		this.reservation.times = [];
+			this.reservation.times = [];
 
-		this.load();
+			this.reservation.name = this.userService.user.name;
 
-		this.reservation.name = this.userService.user.name;
+			this.reservation.phone = this.userService.user.phone;
 
-		this.reservation.phone = this.userService.user.phone;
+			this.load();
+		} else {
+			this._store.getJson('reservation', (reservation) => {
+				this.reservation = reservation || {
+					...this.reservation,
+					yearmonth: this._reservationService.yearmonth(),
+					date: this._reservationService.date(),
+					times: []
+				};
+
+				this.load();
+			});
+		}
+	}
+
+	update(): void {
+		if (!this.userService.user.email) {
+			this._store.setJson('reservation', this.reservation);
+		}
 	}
 
 	load(): void {
@@ -73,8 +93,12 @@ export class BookComponent {
 		this.reservation.yearmonth = date.join('.');
 
 		this._reservationService
-			.get({ query: 'yearmonth=' + this.reservation.yearmonth })
+			.get({
+				query: `yearmonth=${this.reservation.yearmonth}`
+			})
 			.subscribe((reservations) => {
+				console.log(reservations);
+
 				this.reservations = reservations;
 
 				this.reservationsByDateTime = {};
@@ -89,7 +113,10 @@ export class BookComponent {
 	}
 
 	book(): void {
-		if (!this.userService.user.name || !this.userService.user.phone) {
+		if (
+			this.userService.user.email &&
+			(!this.userService.user.name || !this.userService.user.phone)
+		) {
 			this.userService.user.name =
 				this.userService.user.name || this.reservation.name;
 
@@ -98,6 +125,10 @@ export class BookComponent {
 
 			this.userService.updateMe();
 		}
+
+		this._store.remove('reservation');
+
+		this.reservation.deviceID = this._core.deviceID;
 
 		this._reservationService.create(this.reservation).subscribe(() => {
 			this.show = 'booked';
@@ -120,6 +151,8 @@ export class BookComponent {
 		this.reservation.yearmonth = yearmonth.join('.');
 
 		this.load();
+
+		this.update();
 	}
 
 	setTime(time: string, value: Value): void {
@@ -132,5 +165,7 @@ export class BookComponent {
 				(t) => t !== time
 			);
 		}
+
+		this.update();
 	}
 }
