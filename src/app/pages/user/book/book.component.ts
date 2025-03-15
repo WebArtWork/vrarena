@@ -97,8 +97,6 @@ export class BookComponent {
 				query: `yearmonth=${this.reservation.yearmonth}`
 			})
 			.subscribe((reservations) => {
-				console.log(reservations);
-
 				this.reservations = reservations;
 
 				this.reservationsByDateTime = {};
@@ -167,5 +165,9 @@ export class BookComponent {
 		}
 
 		this.update();
+	}
+
+	disabled(dateTime: string): boolean {
+		return this.reservationsByDateTime[dateTime]?.status === 'Confirmed';
 	}
 }
