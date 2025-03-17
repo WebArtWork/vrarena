@@ -7,8 +7,10 @@ export const environment = {
 	...environmentProd,
 	production: false,
 	sign: {
-		email: 'demo@webart.work',
-		password: 'asdasdasdasd'
+		// email: 'demo@webart.work',
+		// password: 'asdasdasdasd',
+		email: '',
+		password: ''
 	}
 };
 
