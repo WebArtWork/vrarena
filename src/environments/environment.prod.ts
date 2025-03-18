@@ -4,10 +4,11 @@ export const environment = {
 	appId: 'vrarena',
 	url: 'https://webart.work',
 	meta: {
-		title: 'VR Arena',
+		suffix: '| VR Arena',
+		title: 'Головна',
 		description:
-			'An amazing place where you enjoy your time playing VR games with friends',
-		icon: 'https://webart.work/api/user/cdn/waw-logo.png'
+			'Ласкаво просимо до VR Arena – місця, де технології майбутнього вже стали реальністю! Ми пропонуємо унікальний досвід віртуальних розваг для всіх вікових категорій. Дізнайтеся більше про наші ігри та заходи, щоб зробити ваш відпочинок незабутнім!',
+		icon: 'https://vrarena.webart.work/template/img/seo.png'
 	},
 	defaultLanguage: 'uk',
 	languages: [

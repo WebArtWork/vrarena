@@ -1,10 +1,10 @@
 {
-	"title": "Title which will fit on all pages",
-	"description": "Description which will fit on all pages",
+	"title": "VR Arena – Головна",
+	"description": "Ласкаво просимо до VR Arena – місця, де технології майбутнього вже стали реальністю! Ми пропонуємо унікальний досвід віртуальних розваг для всіх вікових категорій. Дізнайтеся більше про наші ігри та заходи, щоб зробити ваш відпочинок незабутнім!",
 	"keywords": "waw, web art work, server render, template",
-	"prefix": "/wjst-default",
+	"prefix": "/template",
 	"favicon": "img/favicon.ico",
-	"image": "https://webartwork.github.io/wjst-default/img/avatar.png",
+	"image": "https://vrarena.webart.work/template/img/seo.png",
 	"author": "Honchar Denys",
 	"scss": "scss/index.scss",
 	"items": [
