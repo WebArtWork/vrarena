@@ -27,6 +27,19 @@ jobs:
       - name: Copy CNAME file
         run: cp CNAME dist/app/browser/
 
+      - name: Copy Template
+        run: cp -r template dist/app/browser/
+
+      - name: Install waw globally
+        run: npm install -g waw
+
+      - name: Build with waw
+        run: |
+          cd template
+          waw build
+          cd ..
+          cp template/info.html dist/app/browser/info.html
+
       - name: Set up SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

@@ -158,7 +158,9 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Book'
+						title: 'Бронювання',
+						description:
+							'Забронюйте найкращий VR-досвід у VR Arena вже зараз! Оберіть улюблену гру та зручний час для розваг. Наші сучасні окуляри віртуальної реальності та багатокористувацькі ігри подарують вам яскраві емоції та незабутні враження. Легке онлайн-бронювання та гнучкий графік – плануйте свою VR-пригоду просто та швидко!'
 					}
 				},
 				loadChildren: () =>
@@ -210,7 +212,9 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Games'
+						title: 'Ігри',
+						description:
+							'Перегляньте наш каталог найкращих VR-ігор! У нас є як захопливі шутери, ритм-ігри, стратегічні та кооперативні ігри. Ознайомтеся з описами, скріншотами та особливостями кожної гри, щоб вибрати ідеальний варіант для себе чи компанії друзів.'
 					}
 				},
 				loadChildren: () =>
@@ -460,7 +464,7 @@ const routes: Routes = [
 				defaults: {
 					title: environment.meta.title,
 					description: environment.meta.description,
-					titleSuffix: ' | ' + environment.meta.title,
+					titleSuffix: ' | ' + environment.meta.suffix,
 					'og:image': environment.meta.icon
 				}
 			},
