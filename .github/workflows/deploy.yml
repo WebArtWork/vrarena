@@ -24,8 +24,10 @@ jobs:
       - name: Build Angular app
         run: npm run build
 
-      - name: Build route
+      - name: Create route games
         run: cp dist/app/browser/index.html dist/app/browser/games.html
+
+      - name: Create route book
         run: cp dist/app/browser/index.html dist/app/browser/book.html
 
       - name: Copy CNAME file
