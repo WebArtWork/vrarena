@@ -4,7 +4,6 @@
 		<meta charset="utf-8" />
 		<base href="/" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/x-icon" href="assets/favicon.png" />
 
 		<title>VR Arena – Головна</title>
 		<meta itemprop="name" content="VR Arena – Головна" />
@@ -40,6 +39,18 @@
 			property="og:image"
 			content="https://vrarena.webart.work/template/img/seo.png"
 		/>
+
+		<script>
+			(function () {
+				if (
+					!window.location.hash &&
+					!window.location.hostname.includes('localhost')
+				) {
+					window.location.replace('/info');
+				}
+			})();
+		</script>
+		<link rel="icon" type="image/x-icon" href="assets/favicon.png" />
 	</head>
 
 	<body>

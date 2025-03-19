@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^19.2.2",
     "@angular/router": "^19.2.2",
     "@types/node": "^20.1.5",
+    "clipboardy": "^4.0.0",
     "ngx-ace-wrapper": "^17.0.0",
     "ngx-image-cropper": "^7.2.1",
     "ngx-tinymce": "^19.0.0",
