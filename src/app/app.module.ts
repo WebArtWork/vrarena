@@ -496,7 +496,7 @@ const routes: Routes = [
 	],
 	providers: [
 		/* providers */
-		{ provide: LocationStrategy, useClass: HashLocationStrategy },
+		// { provide: LocationStrategy, useClass: HashLocationStrategy },
 		AuthenticatedGuard,
 		GuestGuard,
 		AdminsGuard
