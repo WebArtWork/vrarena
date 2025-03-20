@@ -15,6 +15,13 @@ const toTop = () => {
 };
 
 const sidebar = {};
+
+document.querySelector(".burger-wrap").addEventListener("click", function () {
+    document.querySelector(".header-info-navigation").classList.toggle("header-info-navigation--open");
+    document.querySelector(".burger").classList.toggle("burger--close");
+});
+
+
 document.addEventListener("DOMContentLoaded", function () {
 	/* ACCARDION CODE */
 	const accordionButtons = document.querySelectorAll(".accordion-button");
@@ -114,3 +121,4 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	};
 });
+
