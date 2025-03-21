@@ -138,6 +138,10 @@ export class BookComponent {
 	}
 
 	setDate(date: string): void {
+		if (this._reservationService.isPastDate(date)) {
+			return;
+		}
+
 		this.show = 'date';
 
 		this.reservation.date = date;
@@ -167,7 +171,11 @@ export class BookComponent {
 		this.update();
 	}
 
-	disabled(dateTime: string): boolean {
-		return this.reservationsByDateTime[dateTime]?.status === 'Confirmed';
+	disabled(date: string, time: string): boolean {
+		return (
+			this.reservationsByDateTime[date + time]?.status === 'Confirmed' ||
+			(date === this._reservationService.date() &&
+				time < new Date().getHours() + 1 + ':00')
+		);
 	}
 }

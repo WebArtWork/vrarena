@@ -6,11 +6,10 @@ import { environment as environmentProd } from './environment.prod';
 export const environment = {
 	...environmentProd,
 	production: false,
+	url: '',
 	sign: {
-		// email: 'demo@webart.work',
-		// password: 'asdasdasdasd',
-		email: '',
-		password: ''
+		email: 'ceo@webart.work',
+		password: 'asdasdasdasd'
 	}
 };
 
