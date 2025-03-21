@@ -1,7 +1,7 @@
 import { CrudDocument } from 'wacom';
 
 export interface Cybersportreservation extends CrudDocument {
-	status: 'New' | 'Confirmed' | 'Denied';
+	status: 'New' | 'Confirmed' | 'Denied' | 'Cancelled';
 	deviceID?: string;
 	yearmonth: string;
 	date: string;

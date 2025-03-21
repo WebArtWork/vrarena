@@ -49,4 +49,12 @@ export class ReservationsComponent {
 	back(): void {
 		window.history.back();
 	}
+
+	cancel(reservation: Cybersportreservation) {
+		reservation.status = 'Cancelled';
+
+		this._reservationService.update(reservation, {
+			name: 'cancel'
+		});
+	}
 }

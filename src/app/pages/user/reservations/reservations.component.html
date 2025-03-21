@@ -127,6 +127,16 @@
 									>
 								</div>
 							</div>
+							<div
+								*ngIf="reservation.status === 'New'"
+								class="bookings__item"
+							>
+								<wbutton (click)="cancel(reservation)">
+									<span translate
+										>Common.Cancel reservation</span
+									>
+								</wbutton>
+							</div>
 						</div>
 						<!-- <div class="bookings-winner">
 							<div class="bookings-winner__icon">
