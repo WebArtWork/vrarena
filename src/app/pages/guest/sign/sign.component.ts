@@ -145,11 +145,25 @@ export class SignComponent {
 	}
 
 	login(): void {
-		this._http.post('/api/user/login', this.user, this._set.bind(this));
+		this._http.post(
+			'/api/user/login',
+			{
+				...this.user,
+				appId: environment.appId
+			},
+			this._set.bind(this)
+		);
 	}
 
 	sign(): void {
-		this._http.post('/api/user/sign', this.user, this._set.bind(this));
+		this._http.post(
+			'/api/user/sign',
+			{
+				...this.user,
+				appId: environment.appId
+			},
+			this._set.bind(this)
+		);
 	}
 
 	reset(): void {

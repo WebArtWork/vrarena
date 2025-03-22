@@ -14,7 +14,9 @@ export class ReservationsComponent {
 	// in case of manager we will see reservations of today and status new
 	isManager = this._router.url.includes('manager');
 
-	reservations = this.isManager ? [] : this._reservationService.getDocs();
+	reservations: Cybersportreservation[] = [];
+	oldReservations: Cybersportreservation[] = [];
+	showOldReservations = false;
 
 	constructor(
 		public _reservationService: CybersportreservationService,
@@ -33,12 +35,26 @@ export class ReservationsComponent {
 					}
 				)
 				.subscribe((reservations) => {
-					this.reservations = reservations;
+					this.reservations = reservations.filter(
+						(t) => !this._reservationService.isPastDate(t.date)
+					);
+					this.oldReservations = reservations.filter((t) =>
+						this._reservationService.isPastDate(t.date)
+					);
 				});
 		} else {
-			this._reservationService.get({
-				query: `deviceID=${this._core.deviceID}`
-			});
+			this._reservationService
+				.get({
+					query: `deviceID=${this._core.deviceID}`
+				})
+				.subscribe((reservations) => {
+					this.reservations = reservations.filter(
+						(t) => !this._reservationService.isPastDate(t.date)
+					);
+					this.oldReservations = reservations.filter((t) =>
+						this._reservationService.isPastDate(t.date)
+					);
+				});
 		}
 	}
 

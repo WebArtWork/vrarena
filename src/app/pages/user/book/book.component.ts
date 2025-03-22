@@ -93,9 +93,14 @@ export class BookComponent {
 		this.reservation.yearmonth = date.join('.');
 
 		this._reservationService
-			.get({
-				query: `yearmonth=${this.reservation.yearmonth}`
-			})
+			.get(
+				{
+					query: `yearmonth=${this.reservation.yearmonth}`
+				},
+				{
+					name: 'public'
+				}
+			)
 			.subscribe((reservations) => {
 				this.reservations = reservations;
 
