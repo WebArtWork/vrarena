@@ -175,7 +175,7 @@ export class BookComponent {
 		return (
 			this.reservationsByDateTime[date + time]?.status === 'Confirmed' ||
 			(date === this._reservationService.date() &&
-				time < new Date().getHours() + 1 + ':00')
+				time.split(':').map(Number)[0] < new Date().getHours())
 		);
 	}
 }

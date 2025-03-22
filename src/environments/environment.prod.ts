@@ -10,7 +10,7 @@ export const environment = {
 			'Ласкаво просимо до VR Arena – місця, де технології майбутнього вже стали реальністю! Ми пропонуємо унікальний досвід віртуальних розваг для всіх вікових категорій. Дізнайтеся більше про наші ігри та заходи, щоб зробити ваш відпочинок незабутнім!',
 		icon: 'https://vrarena.webart.work/template/img/seo.png'
 	},
-	defaultLanguage: 'uk',
+	defaultLanguageCode: 'uk',
 	languages: [
 		{
 			code: 'en',

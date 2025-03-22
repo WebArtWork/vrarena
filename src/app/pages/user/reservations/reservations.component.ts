@@ -53,8 +53,14 @@ export class ReservationsComponent {
 	cancel(reservation: Cybersportreservation) {
 		reservation.status = 'Cancelled';
 
-		this._reservationService.update(reservation, {
-			name: 'cancel'
-		});
+		this._reservationService.update(
+			{
+				...reservation,
+				deviceID: this._core.deviceID
+			},
+			{
+				name: 'cancel'
+			}
+		);
 	}
 }
