@@ -1,25 +1,25 @@
 <div class="auth-wrapper">
 	<div class="auth__wrap">
 		<div class="auth__img">
-			<player-icon
-				(click)="us.setMode(us.mode ? '' : 'dark')"
-			></player-icon>
+			<vrglass-icon
+				(click)="us.setMode(us.mode === 'dark' ? 'white' : 'dark')"
+			></vrglass-icon>
 		</div>
 		<div class="auth__form">
 			<div class="auth">
 				<span
-					(click)="us.setMode('dark')"
 					class="material-icons auth__icon"
-					*ngIf="!us.mode"
+					(click)="us.setMode('dark')"
+					*ngIf="us.mode === 'white'"
 				>
-					dark_mode
+					light_mode
 				</span>
 				<span
 					class="material-icons auth__icon"
-					*ngIf="us.mode"
-					(click)="us.setMode()"
+					(click)="us.setMode('white')"
+					*ngIf="us.mode === 'dark'"
 				>
-					light_mode
+					dark_mode
 				</span>
 				<wform (wSubmit)="submit()" [submition]="user" [config]="form">
 				</wform>
