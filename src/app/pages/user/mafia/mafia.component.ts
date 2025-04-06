@@ -49,21 +49,19 @@ export class MafiaComponent {
 		private _rtc: RtcService,
 		private _router: Router
 	) {
-		this._socket.setUrl(environment.url);
-
 		if (this.gameId) {
 			this.fetch();
 		}
 
 		setTimeout(() => {
-			this._socket.on(this.gameId, (data) => {
+			this._socket.on('mafia', (data) => {
 				console.log(data);
 			});
 
 			setTimeout(() => {
 				console.log('emitting');
 
-				this._socket.emit(this.gameId, {
+				this._socket.emit('mafia', {
 					test: 'test'
 				});
 			}, 5000);
