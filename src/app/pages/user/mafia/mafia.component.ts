@@ -55,6 +55,8 @@ export class MafiaComponent implements OnInit {
 		}
 
 		this._socket.on('mafia', async ({ offer, user, answer }) => {
+			console.log(offer, user, answer);
+
 			if (offer) {
 				await this._rtc.createPeer(user);
 
@@ -74,7 +76,7 @@ export class MafiaComponent implements OnInit {
 					answer: await this._rtc.createAnswer(user, offer),
 					user
 				});
-			} else if (answer) {
+			} else if (answer && this.userService.user._id === user) {
 				await this._rtc.setRemoteAnswer(user, answer);
 			}
 		});
