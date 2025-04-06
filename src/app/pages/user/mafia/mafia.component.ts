@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService, SocketService } from 'wacom';
+import { CoreService, HttpService, SocketService } from 'wacom';
 import { RtcService } from './rtc.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { environment } from 'src/environments/environment';
@@ -30,7 +30,7 @@ export interface Game {
 	styleUrls: ['./mafia.component.scss'],
 	standalone: false
 })
-export class MafiaComponent {
+export class MafiaComponent implements OnInit {
 	state: 'games' | 'lobby' | 'day' | 'night' | 'ended' =
 		this._router.url.includes('mafia/') ? 'lobby' : 'games';
 
@@ -45,6 +45,7 @@ export class MafiaComponent {
 	constructor(
 		public userService: UserService,
 		private _socket: SocketService,
+		private _core: CoreService,
 		private _http: HttpService,
 		private _rtc: RtcService,
 		private _router: Router
@@ -53,19 +54,37 @@ export class MafiaComponent {
 			this.fetch();
 		}
 
-		setTimeout(() => {
-			this._socket.on('mafia', (data) => {
-				console.log(data);
-			});
+		this._socket.on('mafia', async ({ offer, user, answer }) => {
+			if (offer) {
+				await this._rtc.createPeer(user);
 
-			setTimeout(() => {
-				console.log('emitting');
+				const peer = this._rtc.getPeer(user);
+
+				peer!.ontrack = (e) => {
+					const [stream] = e.streams;
+
+					const video = document.getElementById(
+						'camera_' + user
+					) as HTMLVideoElement;
+
+					if (video) video.srcObject = stream;
+				};
 
 				this._socket.emit('mafia', {
-					test: 'test'
+					answer: await this._rtc.createAnswer(user, offer),
+					user
 				});
-			}, 5000);
-		}, 5000);
+			} else if (answer) {
+				await this._rtc.setRemoteAnswer(user, answer);
+			}
+		});
+	}
+
+	async ngOnInit(): Promise<void> {
+		this._socket.emit('mafia', {
+			offer: await this._rtc.createOffer(this._core.deviceID),
+			user: this.userService.user._id
+		});
 	}
 
 	fetch(): void {
@@ -90,8 +109,6 @@ export class MafiaComponent {
 						const video = document.getElementById(
 							'camera_' + this.userService.user._id
 						) as HTMLVideoElement;
-
-						console.log(stream);
 
 						if (video) video.srcObject = stream;
 					}
