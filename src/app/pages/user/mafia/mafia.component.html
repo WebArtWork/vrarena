@@ -1,0 +1,40 @@
+<app-games *ngIf="state === 'games'"></app-games>
+
+@if (gameId && game) {
+<div *ngFor="let player of players">
+	<span>{{player.user.name || player.user.email}}</span>
+	<video
+		*ngIf="player.user._id === userService.user._id"
+		[id]="'camera_' + player.user._id"
+		playsinline
+		autoplay
+		[muted]="true"
+	></video>
+	<video
+		*ngIf="player.user._id !== userService.user._id"
+		[id]="'camera_' + player.user._id"
+		playsinline
+		autoplay
+	></video>
+</div>
+}
+
+<app-lobby
+	*ngIf="state === 'lobby'"
+	(fetch)="fetch()"
+	[game]="game"
+></app-lobby>
+
+<app-day [game]="game" (fetch)="fetch()" *ngIf="state === 'day'"></app-day>
+
+<app-night
+	*ngIf="state === 'night'"
+	(fetch)="fetch()"
+	[game]="game"
+></app-night>
+
+<app-ended
+	*ngIf="state === 'ended'"
+	(fetch)="fetch()"
+	[game]="game"
+></app-ended>

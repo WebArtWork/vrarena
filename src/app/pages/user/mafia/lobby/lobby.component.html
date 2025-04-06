@@ -1,0 +1,21 @@
+<div class="documents-wrapper">
+	<div class="documents-container">
+		<div class="documents-list">
+			<div class="documents-main">
+				<div class="documents-main-content">
+					<div class="documents-main-row">
+						<wbutton (click)="join()" *ngIf="!joined"
+							>Add my self as player</wbutton
+						>
+						<wbutton (click)="leave()" *ngIf="joined"
+							>Remove my self from players</wbutton
+						>
+						<wbutton (click)="start()" *ngIf="author"
+							>Start game</wbutton
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

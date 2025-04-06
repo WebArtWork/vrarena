@@ -122,6 +122,19 @@ const routes: Routes = [
 		canActivate: [AuthenticatedGuard],
 		children: [
 			{
+				path: 'mafia',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Mafia'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/mafia/mafia.module').then(
+						(m) => m.MafiaModule
+					)
+			},
+			{
 				path: 'profile',
 				canActivate: [MetaGuard],
 				data: {
@@ -243,6 +256,19 @@ const routes: Routes = [
 		component: UserComponent,
 		children: [
 			/* user */
+			{
+				path: 'mafia/games',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Games'
+					}
+				},
+				loadChildren: () =>
+					import('./modules/mafia/pages/games/games.module').then(
+						(m) => m.GamesModule
+					)
+			},
 			{
 				path: 'files',
 				canActivate: [MetaGuard],
@@ -458,7 +484,8 @@ const routes: Routes = [
 			http: {
 				url: environment.url
 			},
-			socket: environment.production,
+			// socket: environment.production,
+			socket: true,
 			meta: {
 				useTitleSuffix: true,
 				defaults: {

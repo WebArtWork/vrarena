@@ -1,0 +1,64 @@
+<div class="documents-wrapper">
+	<div class="documents-container">
+		<div class="documents-list">
+			<div class="documents-main">
+				<div class="documents-main-content">
+					<div class="documents-main-row" *ngFor="let game of games">
+						<div class="documents__title">
+							{{game.author.name || game.author.email}}
+						</div>
+						<div class="documents__description">
+							Lorem ipsum dolor sit amet consectetur adipisicing
+							elit. Mollitia voluptatum facilis sit
+							necessitatibus, rem consectetur pariatur sapiente
+							incidunt laudantium praesentium aut iste omnis
+							suscipit autem deleniti, nisi temporibus obcaecati
+							eligendi?
+						</div>
+						<div class="documents-tags">
+							<div class="documents-tags__wrap">
+								<div class="documents-tags__item">
+									Smth here
+								</div>
+							</div>
+							<div class="documents-tags__wrap">
+								<div class="documents-tags__item">
+									Smth here
+								</div>
+							</div>
+							<div class="documents-tags__wrap">
+								<div class="documents-tags__item">
+									Smth here
+								</div>
+							</div>
+							<div class="documents-tags__wrap">
+								<div class="documents-tags__item">
+									Smth here
+								</div>
+							</div>
+							<div class="documents-tags__wrap">
+								<div class="documents-tags__item">
+									Smth here
+								</div>
+							</div>
+							<div class="documents-tags__wrap">
+								<div class="documents-tags__item">
+									Smth here
+								</div>
+							</div>
+							<div class="documents-tags__wrap">
+								<div class="documents-tags__item">
+									Smth here
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="documents-main-row">
+						<div class="documents__title">Start new game</div>
+						<wbutton (click)="create()">Go</wbutton>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
