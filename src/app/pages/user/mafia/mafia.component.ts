@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpService, SocketService } from 'wacom';
 import { RtcService } from './rtc.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
+import { environment } from 'src/environments/environment';
 
 export interface GamePlayer {
 	user: {
@@ -48,6 +49,8 @@ export class MafiaComponent {
 		private _rtc: RtcService,
 		private _router: Router
 	) {
+		this._socket.setUrl(environment.url);
+
 		if (this.gameId) {
 			this.fetch();
 		}
