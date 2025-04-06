@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CoreService, HttpService, SocketService } from 'wacom';
+import { HttpService, SocketService } from 'wacom';
 import { RtcService } from './rtc.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { environment } from 'src/environments/environment';
@@ -30,7 +30,7 @@ export interface Game {
 	styleUrls: ['./mafia.component.scss'],
 	standalone: false
 })
-export class MafiaComponent implements OnInit {
+export class MafiaComponent {
 	state: 'games' | 'lobby' | 'day' | 'night' | 'ended' =
 		this._router.url.includes('mafia/') ? 'lobby' : 'games';
 
@@ -45,7 +45,6 @@ export class MafiaComponent implements OnInit {
 	constructor(
 		public userService: UserService,
 		private _socket: SocketService,
-		private _core: CoreService,
 		private _http: HttpService,
 		private _rtc: RtcService,
 		private _router: Router
@@ -56,64 +55,88 @@ export class MafiaComponent implements OnInit {
 
 		this._socket.on(
 			'mafia',
-			async ({ offer, user, answer, candidate, to }) => {
-				console.log(offer, user, answer);
+			async ({ userA, userB, offer, answer, candidate }) => {
+				if (!userB) {
+					console.log('we have new user');
 
-				if (offer) {
-					await this._rtc.createPeer(user);
+					await this._rtc.createPeer(userA);
 
-					const peer = this._rtc.getPeer(user);
+					const peer = this._rtc.getPeer(userA)!;
+
+					peer.onicecandidate = (e) => {
+						console.log('onicecandidate', e);
+
+						// if (e.candidate) {
+						// 	this._socket.emit('mafia', {
+						// 		candidate: e.candidate,
+						// 		userB: this.userService.user._id,
+						// 		userA
+						// 	});
+						// }
+					};
+
+					peer.ontrack = (e) => {
+						const [stream] = e.streams;
+						const video = document.getElementById(
+							'camera_' + userA
+						) as HTMLVideoElement;
+						if (video) video.srcObject = stream;
+					};
+
+					if (userA < this.userService.user._id) {
+						this._socket.emit('mafia', {
+							offer: await _rtc.createOffer(userA),
+							userA,
+							userB: this.userService.user._id
+						});
+					}
+				} else if (offer && this.userService.user._id === userA) {
+					console.log('we have new connection');
+					await this._rtc.createPeer(userB);
+
+					const peer = this._rtc.getPeer(userB);
 
 					peer!.ontrack = (e) => {
 						const [stream] = e.streams;
 
 						const video = document.getElementById(
-							'camera_' + user
+							'camera_' + userB
 						) as HTMLVideoElement;
 
 						if (video) video.srcObject = stream;
 					};
 
-					peer!.onicecandidate = (e) => {
-						if (e.candidate) {
-							this._socket.emit('mafia', {
-								candidate: e.candidate,
-								user: this.userService.user._id,
-								to: user
-							});
-						}
-					};
-
 					this._socket.emit('mafia', {
-						answer: await this._rtc.createAnswer(user, offer),
-						user
+						answer: await this._rtc.createAnswer(userA, offer),
+						userA,
+						userB
 					});
-				} else if (answer && this.userService.user._id === user) {
-					await this._rtc.setRemoteAnswer(user, answer);
-				} else if (candidate && this.userService.user._id === to) {
-					this._rtc.addIceCandidate(user, candidate);
+				} else if (answer && this.userService.user._id === userB) {
+					console.log('we approve connection');
+					if (!this._rtc.getPeer(userA)) {
+						await this._rtc.createPeer(userA);
+
+						// optional: reattach handlers
+						const peer = this._rtc.getPeer(userA)!;
+
+						peer.ontrack = (e) => {
+							const [stream] = e.streams;
+
+							const video = document.getElementById(
+								'camera_' + userA
+							) as HTMLVideoElement;
+
+							if (video) video.srcObject = stream;
+						};
+					}
+
+					await this._rtc.setRemoteAnswer(userA, answer);
+				} else if (candidate && this.userService.user._id === userA) {
+					console.log('we add ice', candidate);
+					// this._rtc.addIceCandidate(userB, candidate);
 				}
 			}
 		);
-	}
-
-	async ngOnInit(): Promise<void> {
-		await this._rtc.createPeer(this._core.deviceID);
-		const peer = this._rtc.getPeer(this._core.deviceID);
-		peer!.onicecandidate = (e) => {
-			if (e.candidate) {
-				this._socket.emit('mafia', {
-					candidate: e.candidate,
-					user: this.userService.user._id,
-					to: this._core.deviceID
-				});
-			}
-		};
-
-		this._socket.emit('mafia', {
-			offer: await this._rtc.createOffer(this._core.deviceID),
-			user: this.userService.user._id
-		});
 	}
 
 	fetch(): void {
@@ -140,6 +163,10 @@ export class MafiaComponent implements OnInit {
 						) as HTMLVideoElement;
 
 						if (video) video.srcObject = stream;
+
+						this._socket.emit('mafia', {
+							userA: this.userService.user._id
+						});
 					}
 				} else {
 					this._router.navigateByUrl('/mafia');
