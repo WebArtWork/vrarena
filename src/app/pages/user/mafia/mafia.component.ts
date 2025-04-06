@@ -98,6 +98,18 @@ export class MafiaComponent implements OnInit {
 	}
 
 	async ngOnInit(): Promise<void> {
+		await this._rtc.createPeer(this._core.deviceID);
+		const peer = this._rtc.getPeer(this._core.deviceID);
+		peer!.onicecandidate = (e) => {
+			if (e.candidate) {
+				this._socket.emit('mafia', {
+					candidate: e.candidate,
+					user: this.userService.user._id,
+					to: this._core.deviceID
+				});
+			}
+		};
+
 		this._socket.emit('mafia', {
 			offer: await this._rtc.createOffer(this._core.deviceID),
 			user: this.userService.user._id
