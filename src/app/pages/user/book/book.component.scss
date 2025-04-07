@@ -26,6 +26,7 @@
             max-width: 200px;
             background: transparent !important;
             border: 2px solid #8d7ccaa8;
+            color: var(--c-text-primary);
         }
     }
     &__time{
@@ -60,8 +61,14 @@
         font-size: 14px;
     }
     .book__header-btn{
-        width: 150px !important;
-        height: 40px !important;
+        width: 135px !important;
+        height: 35px !important;
         padding: 0 !important;
+    }
+    .book__header-date{
+        font-size: 20px;
+    }
+    .book-input{
+        margin-bottom: 15px;
     }
 }

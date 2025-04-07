@@ -648,6 +648,9 @@ wform {
 		flex: 0 0 100%;
 		padding: 20px 0 0 0;
 	}
+	.documents-main{
+		margin-top: 20px;
+	}
 
 }
 @media screen and (max-width: 479px) {
@@ -659,4 +662,8 @@ wform {
 		flex: 0 0 100%;
 		max-width: 100%;
 	}
+	.documents-main-content {
+		padding: 0;
+	}
+	
 }
