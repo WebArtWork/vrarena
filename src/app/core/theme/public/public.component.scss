@@ -303,3 +303,11 @@ hr {
 		cursor: pointer;
 	}
 }
+@media screen and (max-width: 479px) {
+	.nav__a {
+		padding: 5px 0;
+	}
+	.nav__li:not(:last-child) {
+		margin-right: 25px;
+	}
+}

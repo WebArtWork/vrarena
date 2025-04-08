@@ -114,6 +114,7 @@
 			}
 		}
 		&__data {
+			color: var(--c-text-primary);
 			margin: 0 15px;
 			font-size: 20px;
 			span {
@@ -188,6 +189,9 @@
 }
 
 @media screen and (max-width: 769px) {
+	.calendar-nav[_ngcontent-ng-c4100119087] {
+		justify-content: space-between;
+	}
 	.calendar-nav-year__buttons {
 		width: unset;
 	}
@@ -195,7 +199,7 @@
 		margin-right: 10px;
 	}
 	.calendar-nav-year__data {
-		margin: 0 15px;
+		margin: 0 6px;
 		font-size: 15px;
 		font-weight: 600;
 	}

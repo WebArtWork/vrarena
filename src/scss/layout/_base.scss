@@ -542,11 +542,11 @@ wform {
 		position: fixed;
 		top: 0;
 		left: 0;
-		margin: 5px;
+		margin: 65px 5px 5px 5px;
 		transition: all 0.3s;
 		overflow: hidden;
 		&--open {
-			height: calc(100% - 75px);
+			height: calc(100% - 125px);
 		}
 	}
 	.documents-sidebar-content {
@@ -610,7 +610,7 @@ wform {
 	}
 
 	.burger--close::before {
-		transform: translateY(0px) rotate(45deg);
+		transform: translateY(2px) rotate(45deg);
 	}
 
 	.burger--close::after {
@@ -665,5 +665,7 @@ wform {
 	.documents-main-content {
 		padding: 0;
 	}
-	
+	.documents-main-row {
+        padding: 10px 10px 20px 10px;
+    }
 }

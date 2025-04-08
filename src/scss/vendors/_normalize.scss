@@ -92,6 +92,8 @@ img {
 	max-width: 100%;
 	display: inline-block;
 	vertical-align: top;
+	object-fit: cover;
+	border-radius: 6px;
 }
 a {
 	text-decoration: none;

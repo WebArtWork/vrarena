@@ -14,6 +14,8 @@ import { CoreService, StoreService } from 'wacom';
 	standalone: false
 })
 export class BookComponent {
+	formSubmitted = false;
+	
 	game = this._router.url.includes('/book/')
 		? this._gameService.getByRrlOrId(this._router.url.replace('/book/', ''))
 		: null;
@@ -79,6 +81,16 @@ export class BookComponent {
 		if (!this.userService.user.email) {
 			this._store.setJson('reservation', this.reservation);
 		}
+		this.formSubmitted = true;
+
+		if (!this.reservation.name || !this.reservation.phone) {
+		  // Якщо хочеш, можеш ще вивести повідомлення
+		  console.warn('Заповніть обов’язкові поля!');
+		  return;
+		}
+	  
+		// Вся логіка тут
+		// ...
 	}
 
 	load(): void {
