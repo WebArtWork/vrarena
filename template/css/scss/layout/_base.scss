@@ -304,8 +304,9 @@ ul {
 	}
 	&-socials{
 		a{
+			margin-right: 30px;
 			&:last-child{
-				margin-left: 30px;
+				margin-left: 0;
 			}
 		}
 	}
@@ -556,7 +557,7 @@ ul {
 
 
 		.burger-wrap {
-			display: flex;
+			display: none;
 			align-items: center;
 			position: absolute;
 			z-index: 3;
@@ -639,8 +640,8 @@ ul {
 			}
 		}
 	}
-	.header-info-socials a:last-child {
-		margin-left: 15px;
+	.header-info-socials a {
+		margin-right: 15px;
 	}
 	
 }
