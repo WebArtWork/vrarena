@@ -1,6 +1,4 @@
-<style>
-
-</style>
+<style></style>
 
 <div class="documents-wrapper">
 	<div class="documents-container">
@@ -49,27 +47,37 @@
 							></winput>
 						</div>
 						<winput
-						(wChange)="reservation.name = $event + ''; update()"
-						[value]="userService.user.name || reservation.name"
-						[ngClass]="{'invalid': formSubmitted && !reservation.name}"
-						placeholder="Ваше ім`я"
-						class="book-input"
-						label="Ім`я"
-					>
-					</winput>
-					<div *ngIf="formSubmitted && !reservation.name" class="error-message">Поле обов'язкове</div>
-					
-					<winput
-						(wChange)="reservation.phone = $event + ''; update()"
-						[value]="userService.user.phone || reservation.phone"
-						[ngClass]="{'invalid': formSubmitted && !reservation.phone}"
-						placeholder="Ваш телефон"
-						class="book-input"
-						label="Телефон"
-					>
-					</winput>
-					<div *ngIf="formSubmitted && !reservation.phone" class="error-message">Поле обов'язкове</div>
-					
+							(wChange)="reservation.name = $event + ''; update()"
+							[value]="userService.user.name || reservation.name"
+							[ngClass]="{'invalid': formSubmitted && !reservation.name}"
+							placeholder="Ваше ім`я"
+							class="book-input"
+							label="Ім`я"
+						>
+						</winput>
+						<div
+							*ngIf="formSubmitted && !reservation.name"
+							class="error-message"
+						>
+							Поле обов'язкове
+						</div>
+
+						<winput
+							(wChange)="reservation.phone = $event + ''; update()"
+							[value]="userService.user.phone || reservation.phone"
+							[ngClass]="{'invalid': formSubmitted && !reservation.phone}"
+							placeholder="Ваш телефон"
+							class="book-input"
+							label="Телефон"
+						>
+						</winput>
+						<div
+							*ngIf="formSubmitted && !reservation.phone"
+							class="error-message"
+						>
+							Поле обов'язкове
+						</div>
+
 						<winput
 							(wChange)="reservation.notes = $event + ''; update()"
 							[value]="reservation.notes"

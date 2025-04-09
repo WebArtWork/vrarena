@@ -6,7 +6,7 @@ import { CybersportgameService } from 'src/app/modules/cybersportgame/services/c
 import { Cybersportreservation } from 'src/app/modules/cybersportreservation/interfaces/cybersportreservation.interface';
 import { CybersportreservationService } from 'src/app/modules/cybersportreservation/services/cybersportreservation.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
-import { CoreService, StoreService } from 'wacom';
+import { AlertService, CoreService, StoreService } from 'wacom';
 
 @Component({
 	templateUrl: './book.component.html',
@@ -15,7 +15,7 @@ import { CoreService, StoreService } from 'wacom';
 })
 export class BookComponent {
 	formSubmitted = false;
-	
+
 	game = this._router.url.includes('/book/')
 		? this._gameService.getByRrlOrId(this._router.url.replace('/book/', ''))
 		: null;
@@ -26,17 +26,17 @@ export class BookComponent {
 
 	times = [
 		'10:00 - 11:00',
-		'11:00 - 12:00',
-		'12:00 - 13:00',
-		'13:00 - 14:00',
+		'11:15 - 12:15',
+		'12:30 - 13:30',
+		'13:45 - 14:45',
 		'14:00 - 15:00',
-		'15:00 - 16:00',
-		'16:00 - 17:00',
-		'17:00 - 18:00',
+		'15:15 - 16:15',
+		'16:30 - 17:30',
+		'17:45 - 18:45',
 		'18:00 - 19:00',
-		'19:00 - 20:00',
-		'20:00 - 21:00',
-		'21:00 - 22:00'
+		'19:15 - 20:15',
+		'20:30 - 21:30',
+		'21:45 - 22:45'
 	];
 
 	reservations: Cybersportreservation[] = [];
@@ -47,8 +47,9 @@ export class BookComponent {
 		private _reservationService: CybersportreservationService,
 		private _gameService: CybersportgameService,
 		public userService: UserService,
-		private _core: CoreService,
 		private _store: StoreService,
+		private _alert: AlertService,
+		private _core: CoreService,
 		private _router: Router
 	) {
 		if (this.userService.user.email) {
@@ -84,11 +85,11 @@ export class BookComponent {
 		this.formSubmitted = true;
 
 		if (!this.reservation.name || !this.reservation.phone) {
-		  // Якщо хочеш, можеш ще вивести повідомлення
-		  console.warn('Заповніть обов’язкові поля!');
-		  return;
+			// Якщо хочеш, можеш ще вивести повідомлення
+			console.warn('Заповніть обов’язкові поля!');
+			return;
 		}
-	  
+
 		// Вся логіка тут
 		// ...
 	}
@@ -128,6 +129,12 @@ export class BookComponent {
 	}
 
 	book(): void {
+		if (this.reservation.phone?.length < 8) {
+			return this._alert.error({
+				text: 'Вкажіть свій номер телефону'
+			});
+		}
+
 		if (
 			this.userService.user.email &&
 			(!this.userService.user.name || !this.userService.user.phone)
