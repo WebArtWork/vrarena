@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService, SocketService } from 'wacom';
-import { RtcService } from './rtc.service';
+import { HttpService, SocketService, RtcService } from 'wacom';
 import { UserService } from 'src/app/modules/user/services/user.service';
-import { environment } from 'src/environments/environment';
 
 export interface GamePlayer {
 	user: {
@@ -66,13 +64,13 @@ export class MafiaComponent {
 					peer.onicecandidate = (e) => {
 						console.log('onicecandidate', e);
 
-						// if (e.candidate) {
-						// 	this._socket.emit('mafia', {
-						// 		candidate: e.candidate,
-						// 		userB: this.userService.user._id,
-						// 		userA
-						// 	});
-						// }
+						if (e.candidate) {
+							this._socket.emit('mafia', {
+								candidate: e.candidate,
+								userB: this.userService.user._id,
+								userA
+							});
+						}
 					};
 
 					peer.ontrack = (e) => {
@@ -83,31 +81,30 @@ export class MafiaComponent {
 						if (video) video.srcObject = stream;
 					};
 
-					if (userA < this.userService.user._id) {
-						this._socket.emit('mafia', {
-							offer: await _rtc.createOffer(userA),
-							userA,
-							userB: this.userService.user._id
-						});
-					}
+					this._socket.emit('mafia', {
+						offer: await _rtc.createOffer(userA),
+						userA,
+						userB: this.userService.user._id
+					});
 				} else if (offer && this.userService.user._id === userA) {
 					console.log('we have new connection');
-					await this._rtc.createPeer(userB);
 
-					const peer = this._rtc.getPeer(userB);
+					if (!this._rtc.getPeer(userB)) {
+						await this._rtc.createPeer(userB);
+					}
 
-					peer!.ontrack = (e) => {
+					const peer = this._rtc.getPeer(userB)!;
+
+					peer.ontrack = (e) => {
 						const [stream] = e.streams;
-
 						const video = document.getElementById(
 							'camera_' + userB
 						) as HTMLVideoElement;
-
 						if (video) video.srcObject = stream;
 					};
 
 					this._socket.emit('mafia', {
-						answer: await this._rtc.createAnswer(userA, offer),
+						answer: await this._rtc.createAnswer(userB, offer),
 						userA,
 						userB
 					});
@@ -133,7 +130,8 @@ export class MafiaComponent {
 					await this._rtc.setRemoteAnswer(userA, answer);
 				} else if (candidate && this.userService.user._id === userA) {
 					console.log('we add ice', candidate);
-					// this._rtc.addIceCandidate(userB, candidate);
+
+					this._rtc.addIceCandidate(userB, candidate);
 				}
 			}
 		);
