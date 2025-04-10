@@ -154,13 +154,13 @@ export class MafiaComponent {
 					) {
 						this.players = game.players;
 
-						const stream = await this._rtc.initLocalStream();
-
 						const video = document.getElementById(
 							'camera_' + this.userService.user._id
 						) as HTMLVideoElement;
 
-						if (video) video.srcObject = stream;
+						if (video) {
+							video.srcObject = await this._rtc.initLocalStream();
+						}
 
 						this._socket.emit('mafia', {
 							userA: this.userService.user._id
