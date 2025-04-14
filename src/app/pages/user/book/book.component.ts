@@ -82,7 +82,6 @@ export class BookComponent {
 		if (!this.userService.user.email) {
 			this._store.setJson('reservation', this.reservation);
 		}
-		this.formSubmitted = true;
 
 		if (!this.reservation.name || !this.reservation.phone) {
 			// Якщо хочеш, можеш ще вивести повідомлення
@@ -129,6 +128,12 @@ export class BookComponent {
 	}
 
 	book(): void {
+		if (!this.reservation.times?.length) {
+			return this._alert.error({
+				text: 'Вкажіть час резервації'
+			});
+		}
+
 		if (this.reservation.phone?.length < 8) {
 			return this._alert.error({
 				text: 'Вкажіть свій номер телефону'

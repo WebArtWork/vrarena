@@ -49,18 +49,11 @@
 						<winput
 							(wChange)="reservation.name = $event + ''; update()"
 							[value]="userService.user.name || reservation.name"
-							[ngClass]="{'invalid': formSubmitted && !reservation.name}"
 							placeholder="Ваше ім`я"
 							class="book-input"
 							label="Ім`я"
 						>
 						</winput>
-						<div
-							*ngIf="formSubmitted && !reservation.name"
-							class="error-message"
-						>
-							Поле обов'язкове
-						</div>
 
 						<winput
 							(wChange)="reservation.phone = $event + ''; update()"
@@ -85,11 +78,7 @@
 							class="book-input"
 							label="Інформація"
 						></winput>
-						<wbutton
-							[class.disabled]="!reservation.times.length || !reservation.name || !reservation.phone"
-							[disabled]="!reservation.times.length || !reservation.name || !reservation.phone"
-							(wClick)="book()"
-						>
+						<wbutton (wClick)="book()">
 							<span translate>Common.Book</span>
 						</wbutton>
 					</div>
