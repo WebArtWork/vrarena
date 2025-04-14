@@ -128,14 +128,21 @@ export class BookComponent {
 	}
 
 	book(): void {
+		this.formSubmitted = true;
+
 		if (!this.reservation.times?.length) {
 			return this._alert.error({
+				unique: 'book',
 				text: 'Вкажіть час резервації'
 			});
 		}
 
-		if (this.reservation.phone?.length < 8) {
+		if (
+			!this.reservation.phone?.length ||
+			this.reservation.phone?.length < 8
+		) {
 			return this._alert.error({
+				unique: 'book',
 				text: 'Вкажіть свій номер телефону'
 			});
 		}
