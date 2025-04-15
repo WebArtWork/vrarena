@@ -48,7 +48,7 @@ export class BookComponent {
 		this.showPopup = false;
 		localStorage.setItem('vr-book-popup-timestamp', Date.now().toString());
 	} 
-	// періодичність: для зареєстрованого користувача - раз на життя, а для незареєстрованого - раз в 24 години
+	// періодичність: для user - раз на життя, а для guest - раз в 24 години
 
 	// closePopup() {
 	// 	this.showPopup = false;
@@ -95,7 +95,7 @@ export class BookComponent {
 		if (!lastShown || now - parseInt(lastShown, 10) > 24 * 60 * 60 * 1000) {
 			this.showPopup = true;
 		}
-		// періодичність: для зареєстрованого користувача - раз на життя, а для незареєстрованого - раз в 24 години
+		// періодичність: для user - раз на життя, а для guest - раз в 24 години
 
 		// this.showPopup = true;
 		// періодичність: кожен раз, як заходиш на сайт
