@@ -15,7 +15,6 @@ import { AlertService, CoreService, StoreService } from 'wacom';
 })
 export class BookComponent {
 	formSubmitted = false;
-	showPopup = false;
 
 	game = this._router.url.includes('/book/')
 		? this._gameService.getByRrlOrId(this._router.url.replace('/book/', ''))
@@ -43,17 +42,6 @@ export class BookComponent {
 	reservations: Cybersportreservation[] = [];
 
 	reservationsByDateTime: Record<string, Cybersportreservation> = {};
-
-	closePopup() {
-		this.showPopup = false;
-		localStorage.setItem('vr-book-popup-timestamp', Date.now().toString());
-	} 
-	// періодичність: для user - раз на життя, а для guest - раз в 24 години
-
-	// closePopup() {
-	// 	this.showPopup = false;
-	// }
-	// періодичність: кожен раз, як заходиш на сайт
 
 	constructor(
 		private _reservationService: CybersportreservationService,
@@ -88,17 +76,6 @@ export class BookComponent {
 				this.load();
 			});
 		}
-
-		const lastShown = localStorage.getItem('vr-book-popup-timestamp');
-		const now = Date.now();
-
-		if (!lastShown || now - parseInt(lastShown, 10) > 24 * 60 * 60 * 1000) {
-			this.showPopup = true;
-		}
-		// періодичність: для user - раз на життя, а для guest - раз в 24 години
-
-		// this.showPopup = true;
-		// періодичність: кожен раз, як заходиш на сайт
 	}
 
 	update(): void {

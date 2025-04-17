@@ -1,12 +1,5 @@
 <style></style>
 
-<div *ngIf="showPopup" class="popup-overlay">
-	<div class="popup-box">
-		<p>Якщо запис здійснює дитина до 12 років — просимо залишити контакт батьків.</p>
-		<button (click)="closePopup()">Зрозуміло</button>
-	</div>
-</div>
-
 <div class="documents-wrapper">
 	<div class="documents-container">
 		<div class="documents-list">
@@ -46,6 +39,9 @@
 							[ngClass]="{'invalid': formSubmitted && !reservation.phone}" placeholder="Ваш телефон"
 							class="book-input" label="Телефон">
 						</winput>
+						<div class="book__hint">
+							Якщо запис здійснює дитина до 12 років — просимо залишити контакт батьків.
+						</div>
 						<div *ngIf="formSubmitted && !reservation.phone" class="error-message">
 							Поле обов'язкове
 						</div>
