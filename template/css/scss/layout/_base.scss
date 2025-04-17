@@ -398,6 +398,9 @@ ul {
 		line-height: 1;
 		padding: 15px 0 10px 0;
 	}
+	&__description{
+		word-break: break-word;
+	}
 	&__btn{
 		padding-top: 25px;
 		margin-top: auto;
