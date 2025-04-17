@@ -50,6 +50,14 @@ export class GamesComponent {
 			this._form
 				.modal<Cybersportgame>(this.form, [], doc)
 				.then((updated: Cybersportgame) => {
+					updated.description = updated.description || '';
+
+					updated.shortDescription = updated.shortDescription || '';
+
+					updated.shortDescription = updated.shortDescription.split(
+						'<div class="jso-cursor-trail-wrapper'
+					)[0];
+
 					updated.description = updated.description.split(
 						'<div class="jso-cursor-trail-wrapper'
 					)[0];
