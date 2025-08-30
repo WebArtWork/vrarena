@@ -2,7 +2,7 @@ export const environment = {
 	roles: ['cybersportmanager'],
 	production: true,
 	appId: 'vrarena',
-	url: 'https://webart.work',
+	url: 'https://api.webart.work',
 	meta: {
 		suffix: 'VR Arena',
 		title: 'Головна',
