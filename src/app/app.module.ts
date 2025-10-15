@@ -15,7 +15,6 @@ import { GuestGuard } from './core/guards/guest.guard';
 import { AdminsGuard } from './core/guards/admins.guard';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PublicComponent } from './core/theme/public/public.component';
-import { url } from 'inspector';
 
 const routes: Routes = [
 	{

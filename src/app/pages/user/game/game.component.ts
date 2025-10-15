@@ -13,6 +13,14 @@ import { environment } from 'src/environments/environment';
 export class GameComponent {
 	readonly url = environment.url;
 
+	get description(): string {
+		return (
+			this.game.description
+				?.split('https://webart.work')
+				.join('https://api.webart.work') || ''
+		);
+	}
+
 	game = this._gameService.getByRrlOrId(
 		this._router.url.replace('/game/', '')
 	);
