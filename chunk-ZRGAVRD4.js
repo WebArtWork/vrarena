@@ -1,0 +1,1 @@
+import{jb as e,r as t}from"./chunk-ML3SWCJJ.js";var a=(()=>{class r extends e{constructor(){super({name:"cybersportrank"})}static{this.\u0275fac=function(o){return new(o||r)}}static{this.\u0275prov=t({token:r,factory:r.\u0275fac,providedIn:"root"})}}return r})();export{a};
