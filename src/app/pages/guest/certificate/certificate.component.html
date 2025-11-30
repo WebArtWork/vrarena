@@ -1,0 +1,50 @@
+<div class="certificate-page">
+	@if (!certificate) {
+	<div class="certificate-spinner">
+		<div class="certificate-spinner__circle"></div>
+	</div>
+	} @else if (certificate) {
+	<div class="certificate">
+		<div class="certificate__header">
+			<div class="certificate__brand">
+				<div class="certificate__brand-title">VR Arena</div>
+				<div class="certificate__brand-subtitle">Сертифікат участі</div>
+			</div>
+
+			<div class="certificate__status">{{certificate.status}}</div>
+		</div>
+
+		<div class="certificate__body">
+			<div class="certificate__title">{{ certificate.title }}</div>
+
+			<div class="certificate__code-block">
+				<div class="certificate__code-label">Код сертифіката</div>
+				<div class="certificate__code-value">
+					{{ certificate.code }}
+				</div>
+			</div>
+
+			<div class="certificate__details">
+				<div class="certificate__detail">
+					<div class="certificate__detail-label">Дата видачі</div>
+					<div class="certificate__detail-value">
+						{{ certificate.issueDate }}
+					</div>
+				</div>
+
+				<div class="certificate__detail">
+					<div class="certificate__detail-label">Локація</div>
+					<div class="certificate__detail-value">
+						{{ certificate.location }}
+					</div>
+				</div>
+			</div>
+
+			<div class="certificate__footer-text">
+				Цей сертифікат підтверджує участь у VR Arena та є дійсним за
+				наявності коректного 6-значного коду.
+			</div>
+		</div>
+	</div>
+	}
+</div>

@@ -1,19 +1,19 @@
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 // Core
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from 'src/app/core/core.module';
+import { AppComponent } from './app.component';
 import { GuestComponent } from './core/theme/guest/guest.component';
 import { UserComponent } from './core/theme/user/user.component';
-import { AppComponent } from './app.component';
-import { CoreModule } from 'src/app/core/core.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // config
-import { WacomModule, MetaGuard } from 'wacom';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { MetaGuard, WacomModule } from 'wacom';
+import { AdminsGuard } from './core/guards/admins.guard';
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 import { GuestGuard } from './core/guards/guest.guard';
-import { AdminsGuard } from './core/guards/admins.guard';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PublicComponent } from './core/theme/public/public.component';
 
 const routes: Routes = [
@@ -21,6 +21,25 @@ const routes: Routes = [
 		path: '',
 		redirectTo: '/games',
 		pathMatch: 'full'
+	},
+	{
+		path: '',
+		component: GuestComponent,
+		children: [
+			{
+				path: 'certificate/:_id',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Сертифікат'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/guest/certificate/certificate.module').then(
+						(m) => m.CertificateModule
+					)
+			}
+		]
 	},
 	{
 		path: '',
@@ -329,6 +348,19 @@ const routes: Routes = [
 		component: UserComponent,
 		children: [
 			/* admin */
+			{
+				path: 'certificates',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Certificates'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/cybersportcertificate/pages/certificates/certificates.routes'
+					).then((r) => r.certificatesRoutes)
+			},
 			{
 				path: 'ranks',
 				canActivate: [MetaGuard],
