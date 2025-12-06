@@ -25,7 +25,7 @@
 						</div>
 
 						<div class="book__time">
-							<winput *ngFor="let time of times" [disabled]="disabled(reservation.date, time)"
+							<winput *ngFor="let time of times" [disabled]="true || disabled(reservation.date, time)"
 								[value]="reservation.times.includes(time)" (wChange)="setTime(time, $event)"
 								class="book-input" type="checkbox" [label]="time"></winput>
 						</div>
