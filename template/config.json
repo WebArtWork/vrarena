@@ -1,0 +1,10 @@
+{
+	"port": 8000,
+	"modules": {
+		"core": "waw",
+		"sem": "waw"
+	},
+	"build": {
+		"base": "/template/"
+	}
+}

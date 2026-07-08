@@ -1,0 +1,1 @@
+import{O as t,Ra as n,s as o}from"./chunk-BSFPITX3.js";var d=(()=>{class e{static{this.\u0275fac=function(i){return new(i||e)}}static{this.\u0275mod=t({type:e})}static{this.\u0275inj=o({imports:[n]})}}return e})();export{d as a};
