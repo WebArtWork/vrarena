@@ -47,7 +47,7 @@
 
 						<winput (wChange)="reservation.notes = $event + ''; update()" [value]="reservation.notes"
 							placeholder="Додаткова інформація" class="book-input" label="Інформація"></winput>
-						<wbutton (wClick)="book()">
+						<wbutton [disabled]="isClosed" (wClick)="book()">
 							<span translate>Common.Book</span>
 						</wbutton>
 					</div>

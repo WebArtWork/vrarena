@@ -16,6 +16,8 @@ import { AlertService, CoreService, StoreService } from 'wacom';
 export class BookComponent {
 	formSubmitted = false;
 
+	isClosed = true;
+
 	game = this._router.url.includes('/book/')
 		? this._gameService.getByRrlOrId(this._router.url.replace('/book/', ''))
 		: null;
@@ -209,6 +211,7 @@ export class BookComponent {
 
 	disabled(date: string, time: string): boolean {
 		return (
+			this.isClosed ||
 			this.reservationsByDateTime[date + time]?.status === 'Confirmed' ||
 			(date === this._reservationService.date() &&
 				time.split(':').map(Number)[0] < new Date().getHours() - 1)
